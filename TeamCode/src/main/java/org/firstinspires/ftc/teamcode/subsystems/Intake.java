@@ -79,7 +79,7 @@ public class Intake {
     public void intakePosition(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.82, 0.65);
+        this.setServos(0.81, 0.65);
     }
     public void intakePosition5th(int extend){
         this.setTarget(extend);
@@ -100,6 +100,10 @@ public class Intake {
         intakeservo2.setPower(power);
     }
     public boolean canEject(){
-        return this.getEncoderPos()<=5;
+        if (this.getEncoderPos()<=5){
+            return this.readHeightAnalog()>255;
+        }else{
+            return false;
+        }
     }
 }
