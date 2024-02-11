@@ -15,24 +15,25 @@ public class Outtake {
     Servo miniTurret, depositFlip, depositExtendo, pixelLatch;
     AnalogInput turretEncoder, flipEncoder;
     MotorGroup outtakeMotors;
-    public PIDFController intakeController=new PIDFController(0.001, 0, 0, 0);
-    public static double kf=0.2;
+    public PIDFController intakeController=new PIDFController(0.01, 0, 0, 0);
+    public static double kf=0.11;
     public void init(HardwareMap hardwareMap){
-        outtake1=new Motor(hardwareMap, "outtake1", Motor.GoBILDA.RPM_1150);
-        outtake2=new Motor(hardwareMap, "outtake2", Motor.GoBILDA.RPM_1150);
-        outtake2.setInverted(true);
+        outtake1=new Motor(hardwareMap, "depositfirst1", Motor.GoBILDA.RPM_1150);
+        outtake2=new Motor(hardwareMap, "depositsecond2", Motor.GoBILDA.RPM_1150);
+        outtake1.setInverted(true);
         outtake1.resetEncoder();
         outtake2.resetEncoder();
         outtakeMotors=new MotorGroup(outtake1, outtake2);
+        outtake1.encoder.setDirection(Motor.Direction.REVERSE);
 
-        miniTurret=hardwareMap.servo.get("miniTurret");
-        depositFlip=hardwareMap.servo.get("depositFlip");
-        depositExtendo=hardwareMap.servo.get("depositExtendo");
-        pixelLatch=hardwareMap.servo.get("pixelLatch");
+        miniTurret=hardwareMap.servo.get("miniturret2");
+        depositFlip=hardwareMap.servo.get("depositflip4");
+        depositExtendo=hardwareMap.servo.get("depositextendo3");
+        //pixelLatch=hardwareMap.servo.get("pixellatch");
 
 
-        turretEncoder=hardwareMap.analogInput.get("turretEncoder");
-        flipEncoder=hardwareMap.analogInput.get("flipEncoder");
+        turretEncoder=hardwareMap.analogInput.get("turretencoder");
+        flipEncoder=hardwareMap.analogInput.get("flipencoder");
     }
     public void setTarget(int setPoint){
         intakeController.setSetPoint(setPoint);
@@ -45,7 +46,7 @@ public class Outtake {
             double targetPower = intakeController.calculate(this.getEncoderPos());
             outtakeMotors.set(targetPower+kf);
         }else{
-            if (outtakeMotors.encoder.getPosition()<5){
+            if (this.getEncoderPos()<5){
                 outtakeMotors.set(0+kf);
             }else{
                 outtakeMotors.set(-1+kf);
@@ -53,7 +54,7 @@ public class Outtake {
         }
     }
     public int getEncoderPos(){
-        return outtakeMotors.getCurrentPosition();
+        return outtake1.getCurrentPosition();
     }
     public double[] readAxonAnalog(){
         double[] degrees = new double[2];
@@ -63,18 +64,22 @@ public class Outtake {
         return degrees;
     }
     public void setServos(double turret, boolean flipped, boolean extended, boolean latchClosed){
-        miniTurret.setPosition(turret);
+        miniTurret.setPosition(0.475+turret);
 
         if (flipped){
             //set postion
+            depositFlip.setPosition(0.7);
         }else{
             //set position
+            depositFlip.setPosition(0.18);
         }
 
         if (extended){
             //set postion
+            depositExtendo.setPosition(0.3);
         }else{
             //set position
+            depositExtendo.setPosition(0.95);
         }
 
         if (latchClosed){
@@ -86,9 +91,11 @@ public class Outtake {
     public void depositPosition(int height, double angle){
         this.setTarget(height);
         //set servos
+        this.setServos(angle, true, true, true);
     }
     public void transferPosition(){
         this.setTarget(0);
         //set servos
+        this.setServos(0, false, false, false);
     }
 }
