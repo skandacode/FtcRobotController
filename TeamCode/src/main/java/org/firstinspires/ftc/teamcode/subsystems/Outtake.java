@@ -29,7 +29,7 @@ public class Outtake {
         miniTurret=hardwareMap.servo.get("miniturret2");
         depositFlip=hardwareMap.servo.get("depositflip4");
         depositExtendo=hardwareMap.servo.get("depositextendo3");
-        //pixelLatch=hardwareMap.servo.get("pixellatch");
+        pixelLatch=hardwareMap.servo.get("depositlatch5");
 
 
         turretEncoder=hardwareMap.analogInput.get("turretencoder");
@@ -79,19 +79,24 @@ public class Outtake {
             depositExtendo.setPosition(0.3);
         }else{
             //set position
-            depositExtendo.setPosition(0.95);
+            depositExtendo.setPosition(0.87);
         }
 
         if (latchClosed){
             //set position
+            pixelLatch.setPosition(0.5);
         }else{
             //set position
+            pixelLatch.setPosition(0.3);
         }
     }
     public void depositPosition(int height, double angle){
         this.setTarget(height);
         //set servos
         this.setServos(angle, true, true, true);
+    }
+    public void resetEncoder(){
+        outtake1.resetEncoder();
     }
     public void transferPosition(){
         this.setTarget(0);

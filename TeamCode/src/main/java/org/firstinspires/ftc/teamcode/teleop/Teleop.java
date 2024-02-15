@@ -95,6 +95,10 @@ public class Teleop extends LinearOpMode {
                 outtake.setServos(0, false, false, false);
                 outtake.setTarget(0);
             }
+            if (gamepad1.share && gamepad1.options){
+                intake.resetEncoder();
+                outtake.resetEncoder();
+            }
 
             transferMachine.update();
             intake.update();
@@ -102,6 +106,9 @@ public class Teleop extends LinearOpMode {
 
             double loop = System.nanoTime();
             telemetry.addData("hz ", 1000000000 / (loop - loopTime));
+            telemetry.addData("intake pos", intake.getEncoderPos());
+            telemetry.addData("outtake pos", outtake.getEncoderPos());
+
             loopTime = loop;
             telemetry.update();
         }

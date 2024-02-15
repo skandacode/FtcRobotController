@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.testing;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -14,13 +14,14 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class deposittest extends LinearOpMode {
     Motor outtake1, outtake2;
-    Servo miniTurret, depositFlip, depositExtendo;
+    Servo miniTurret, depositFlip, depositExtendo, pixellatch;
     AnalogInput turretEncoder, flipEncoder;
     MotorGroup outtakeMotors;
     public static double motorPowers=0;
     public static double turretPos=0;
     public static double flipPos=0;
-    public static double extendoPos=0;
+    public static double extendoPos=0.5;
+    public static double latchPos=0;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -36,7 +37,7 @@ public class deposittest extends LinearOpMode {
         miniTurret=hardwareMap.servo.get("miniturret2");
         depositFlip=hardwareMap.servo.get("depositflip4");
         depositExtendo=hardwareMap.servo.get("depositextendo3");
-
+        pixellatch=hardwareMap.servo.get("depositlatch5");
 
         turretEncoder=hardwareMap.analogInput.get("turretencoder");
         flipEncoder=hardwareMap.analogInput.get("flipencoder");
@@ -48,6 +49,7 @@ public class deposittest extends LinearOpMode {
             miniTurret.setPosition(0.475+turretPos);
             depositFlip.setPosition(flipPos);
             depositExtendo.setPosition(extendoPos);
+            pixellatch.setPosition(latchPos);
             telemetry.addData("Motor encoder pos", outtake1.getCurrentPosition());
             telemetry.addData("flip encoder pos", flipEncoder.getVoltage());
             telemetry.addData("turret encoder pos", turretEncoder.getVoltage());

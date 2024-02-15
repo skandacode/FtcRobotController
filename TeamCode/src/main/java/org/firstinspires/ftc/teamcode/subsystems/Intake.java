@@ -72,6 +72,9 @@ public class Intake {
     public double readHeightAnalog(){
         return intakeheightsEncoder.getVoltage()*360/3.3;
     }
+    public void resetEncoder(){
+        intakemotor.resetEncoder();
+    }
     public void setServos(double height, double pitch){
         intakeheights.setPosition(height);
         pitchcontrol.setPosition(pitch);
@@ -79,7 +82,7 @@ public class Intake {
     public void intakePosition(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.81, 0.65);
+        this.setServos(0.82, 0.6);
     }
     public void intakePosition5th(int extend){
         this.setTarget(extend);
@@ -92,7 +95,7 @@ public class Intake {
     public void transferPosition(){
         this.setTarget(0);
         //set servos
-        setServos(0.23, 0.3);
+        setServos(0.24, 0.3);
 
     }
     public void setPower(double power){
