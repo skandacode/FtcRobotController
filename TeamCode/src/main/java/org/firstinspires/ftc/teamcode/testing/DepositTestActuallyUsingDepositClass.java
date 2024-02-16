@@ -16,6 +16,7 @@ public class DepositTestActuallyUsingDepositClass extends LinearOpMode {
     public static boolean flipped=false;
     public static boolean extended=false;
     public static double turretAngle=0;
+    public static boolean opened=false;
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -24,7 +25,8 @@ public class DepositTestActuallyUsingDepositClass extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()){
             outtake.setTarget(depositTarget);
-            outtake.setServos(turretAngle, flipped, extended, false);
+            outtake.setServos(turretAngle, flipped, extended);
+            outtake.setPixelLatch(opened);
             telemetry.addData("Deposit motor Position", outtake.getEncoderPos());
             telemetry.addData("TurretAngle", outtake.readAxonAnalog()[0]);
             telemetry.addData("Deposit Position analog", outtake.readAxonAnalog()[1]);

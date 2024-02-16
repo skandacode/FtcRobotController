@@ -15,6 +15,7 @@ public class Outtake {
     Servo miniTurret, depositFlip, depositExtendo, pixelLatch;
     AnalogInput turretEncoder, flipEncoder;
     MotorGroup outtakeMotors;
+    boolean scoring=false;
     public PIDFController intakeController=new PIDFController(0.01, 0, 0, 0);
     public static double kf=0.11;
     public void init(HardwareMap hardwareMap){
@@ -63,7 +64,7 @@ public class Outtake {
 
         return degrees;
     }
-    public void setServos(double turret, boolean flipped, boolean extended, boolean latchClosed){
+    public void setServos(double turret, boolean flipped, boolean extended){
         miniTurret.setPosition(0.475+turret);
 
         if (flipped){
@@ -81,26 +82,32 @@ public class Outtake {
             //set position
             depositExtendo.setPosition(0.87);
         }
-
+    }
+    public void setPixelLatch(boolean latchClosed){
         if (latchClosed){
             //set position
-            pixelLatch.setPosition(0.5);
+            pixelLatch.setPosition(0);
         }else{
             //set position
-            pixelLatch.setPosition(0.3);
+            pixelLatch.setPosition(0.55);
         }
     }
     public void depositPosition(int height, double angle){
+        this.scoring=true;
         this.setTarget(height);
         //set servos
-        this.setServos(angle, true, true, true);
+        this.setServos(angle, true, true);
     }
     public void resetEncoder(){
         outtake1.resetEncoder();
     }
     public void transferPosition(){
+        this.scoring=false;
         this.setTarget(0);
         //set servos
-        this.setServos(0, false, false, false);
+        this.setServos(0, false, false);
+    }
+    public boolean getScoring(){
+        return this.scoring;
     }
 }

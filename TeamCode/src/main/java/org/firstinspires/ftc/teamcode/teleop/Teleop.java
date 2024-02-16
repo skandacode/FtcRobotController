@@ -88,12 +88,17 @@ public class Teleop extends LinearOpMode {
             }
 
             if (gamepad1.dpad_up){//score deposit
-                outtake.setServos(0, true, true, true);
-                outtake.setTarget(300);
+                outtake.depositPosition(300, 0);
+                outtake.setPixelLatch(true);
             }
             if (gamepad1.dpad_down){//retract
-                outtake.setServos(0, false, false, false);
-                outtake.setTarget(0);
+                outtake.transferPosition();
+                outtake.setPixelLatch(false);
+            }
+            if (gamepad1.right_bumper || !outtake.getScoring()){
+                outtake.setPixelLatch(false);
+            }else{
+                outtake.setPixelLatch(true);
             }
             if (gamepad1.share && gamepad1.options){
                 intake.resetEncoder();

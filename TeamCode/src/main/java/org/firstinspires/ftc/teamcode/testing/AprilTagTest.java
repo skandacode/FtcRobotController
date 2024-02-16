@@ -153,7 +153,7 @@ public class AprilTagTest extends LinearOpMode {
                     continue;
                 }
                 Translation2d aprilPose=new Translation2d(0, 72);
-                Translation2d toApril=new Translation2d(detection.ftcPose.x, detection.ftcPose.y).rotateBy(new Rotation2d(-Math.toRadians(detection.ftcPose.yaw)));
+                Translation2d toApril=new Translation2d(detection.ftcPose.x+8.5, detection.ftcPose.y).rotateBy(new Rotation2d(-Math.toRadians(detection.ftcPose.yaw)));
                 Translation2d robotTranslation=aprilPose.minus(toApril);
                 Rotation2d robotRotation=Rotation2d.fromDegrees((180)-detection.ftcPose.yaw);
                 Pose2d robotPosition=new Pose2d(robotTranslation.rotateBy(Rotation2d.fromDegrees(180)), robotRotation);
