@@ -21,14 +21,44 @@ public class Hang {
     }
     public void raise(){
         //set servo positions
+        if (!hang1.isPwmEnabled()){
+            hang1.setPwmEnable();
+        }
+        if (!hang2.isPwmEnabled()){
+            hang2.setPwmEnable();
+        }
+
         hang1.setPosition(0);
         hang2.setPosition(0);
 
     }
+    public void retract(){
+        if (!hang1.isPwmEnabled()){
+            hang1.setPwmEnable();
+        }
+        if (!hang2.isPwmEnabled()){
+            hang2.setPwmEnable();
+        }
+
+        hang1.setPosition(0.35);
+        hang2.setPosition(0.35);
+    }
     public void hang(){
+        if (!hang1.isPwmEnabled()){
+            hang1.setPwmEnable();
+        }
+        if (!hang2.isPwmEnabled()){
+            hang2.setPwmEnable();
+        }
+
         hang1.setPosition(0.35);
         hang2.setPosition(0.35);
         hangMotor.set(1);
+    }
+    public void release(){
+        hang1.setPwmDisable();
+        hang2.setPwmDisable();
+        hangMotor.set(0);
     }
     public void keepDrone(){
         //set position

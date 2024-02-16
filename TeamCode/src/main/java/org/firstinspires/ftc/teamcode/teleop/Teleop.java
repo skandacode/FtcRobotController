@@ -18,7 +18,7 @@ public class Teleop extends LinearOpMode {
     MecanumDrive drive;
     Intake intake=new Intake();
     Outtake outtake=new Outtake();
-    Hang hang;
+    Hang hang=new Hang();
     enum TransferStates{
         IDLE,
         RETRACT,
@@ -36,9 +36,10 @@ public class Teleop extends LinearOpMode {
                 new Motor(hardwareMap, "backright", Motor.GoBILDA.RPM_312));
         intake.init(hardwareMap);
         outtake.init(hardwareMap);
-        //hang.init(hardwareMap);
+        hang.init(hardwareMap);
         intake.intakePosition(0);
         outtake.transferPosition();
+        hang.retract();
         double loopTime=0.0;
         StateMachine transferMachine= new StateMachineBuilder()
                 .state(TransferStates.IDLE)
@@ -103,6 +104,15 @@ public class Teleop extends LinearOpMode {
             if (gamepad1.share && gamepad1.options){
                 intake.resetEncoder();
                 outtake.resetEncoder();
+            }
+            if (gamepad2.right_bumper){
+                hang.retract();
+            } else if (gamepad2.left_bumper){
+                hang.raise();
+            }else if (gamepad2.touchpad){
+                hang.hang();
+            }else{
+                hang.release();
             }
 
             transferMachine.update();
