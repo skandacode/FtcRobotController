@@ -14,16 +14,20 @@ public class Hang {
     public void init(HardwareMap hardwareMap){
         hang1=(ServoImplEx) hardwareMap.servo.get("hang1");
         hang2=(ServoImplEx) hardwareMap.servo.get("hang2");
+        hang2.setDirection(Servo.Direction.REVERSE);
         drone=hardwareMap.servo.get("drone");
-        hangMotor=new Motor(hardwareMap, "hangMotor", Motor.GoBILDA.RPM_312);
+        hangMotor=new Motor(hardwareMap, "hangmotor3", Motor.GoBILDA.RPM_435);
         hangMotor.resetEncoder();
     }
     public void raise(){
         //set servo positions
+        hang1.setPosition(0);
+        hang2.setPosition(0);
+
     }
     public void hang(){
-        hang1.setPwmDisable();
-        hang2.setPwmDisable();
+        hang1.setPosition(0.35);
+        hang2.setPosition(0.35);
         hangMotor.set(1);
     }
     public void keepDrone(){
