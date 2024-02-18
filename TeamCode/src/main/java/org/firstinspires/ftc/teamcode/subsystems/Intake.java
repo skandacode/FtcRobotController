@@ -59,7 +59,7 @@ public class Intake {
             }
             intakemotor.set(targetPower);
         }else{
-            if (intakemotor.encoder.getPosition()<10){
+            if (intakemotor.encoder.getPosition()<5){
                 intakemotor.set(0);
             }else{
                 intakemotor.set(-1);
@@ -83,6 +83,10 @@ public class Intake {
         this.setTarget(extend);
         //set servos
         this.setServos(0.82, 0.6);
+    }
+    public void purplePosition(int extend){
+        this.setTarget(extend);
+        this.setServos(0.73, 0.25);
     }
     public void intakePosition5th(int extend){
         this.setTarget(extend);

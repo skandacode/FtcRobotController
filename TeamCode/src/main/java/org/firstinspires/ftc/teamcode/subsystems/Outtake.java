@@ -72,7 +72,7 @@ public class Outtake {
             depositFlip.setPosition(0.7);
         }else{
             //set position
-            depositFlip.setPosition(0.18);
+            depositFlip.setPosition(0.2);
         }
 
         if (extended){
@@ -109,5 +109,10 @@ public class Outtake {
     }
     public boolean getScoring(){
         return this.scoring;
+    }
+    public void purpleHold(){
+        this.setServos(0, false, false);
+        depositExtendo.setPosition(0.98);
+        this.setTarget(0);
     }
 }
