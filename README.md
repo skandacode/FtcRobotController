@@ -1,3 +1,11 @@
+THINGS STILL TO DO:
+BLUE PARK
+RED AUTOS
+BLUE CYCLES
+FAR AUTOS
+GAMEPAD ADJUSTMENTS
+
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the CENTERSTAGE (2023-2024) competition season.
