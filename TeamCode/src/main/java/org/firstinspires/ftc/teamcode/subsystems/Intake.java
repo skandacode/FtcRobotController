@@ -24,7 +24,7 @@ public class Intake {
 
     public PIDFController intakeController=new PIDFController(0.003, 0, 0, 0);
     public static double kF=0.4;
-    public static double positionTolerance=5;
+    public static double positionTolerance=10;
     public void init(HardwareMap hardwareMap){
         intakemotor=new Motor(hardwareMap, "intake0", Motor.GoBILDA.RPM_1150);
         intakeheights=(ServoImplEx) hardwareMap.servo.get("intakeheights0");
@@ -79,10 +79,14 @@ public class Intake {
         intakeheights.setPosition(height);
         pitchcontrol.setPosition(pitch);
     }
+    public void stay(int extend){
+        this.setTarget(extend);
+        this.setServos(0.5, 0.5);
+    }
     public void intakePosition(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.82, 0.6);
+        this.setServos(0.82, 0.5);
     }
     public void purplePosition(int extend){
         this.setTarget(extend);
@@ -91,15 +95,17 @@ public class Intake {
     public void intakePosition5th(int extend){
         this.setTarget(extend);
         //set servos
+        this.setServos(0.75, 0.5);
     }
     public void intakePosition3rd(int extend){
         this.setTarget(extend);
         //set servos
+        this.setServos(0.78, 0.5);
     }
     public void transferPosition(){
         this.setTarget(0);
         //set servos
-        setServos(0.24, 0.3);
+        setServos(0.24, 0.2);
 
     }
     public void setPower(double power){

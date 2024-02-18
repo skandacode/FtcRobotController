@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.auto;
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -21,7 +22,7 @@ import java.util.Objects;
 
 @Config
 @Autonomous
-public class BlueAuto extends LinearOpMode
+public class BlueAutoPurplePixel extends LinearOpMode
 {
     OpenCvWebcam webcam;
     PropPosition randomization=PropPosition.NONE;
@@ -61,26 +62,78 @@ public class BlueAuto extends LinearOpMode
             }
         });
         TrajectorySequence left=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .lineToLinearHeading(new Pose2d(49.5, 41, Math.toRadians(200.00)))
-                .addDisplacementMarker(5, ()-> {
-                    outtake.setPixelLatch(true);
-                    outtake.depositPosition(0, 0);
+                .lineTo(new Vector2d(27, 40))
+                .setReversed(true)
+                .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
+                    intake.intakePosition5th(0);
                 })
+                .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
+                    outtake.depositPosition(0, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .splineTo(new Vector2d(48, 43), Math.toRadians(2.00))
+                .setReversed(false)
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                    outtake.transferPosition();
+                })
+                .waitSeconds(2.5)
                 .build();
 
         TrajectorySequence middle=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .lineToLinearHeading(new Pose2d(50, 35, Math.toRadians(200.00)))
-                .addDisplacementMarker(5, ()-> {
-                    outtake.setPixelLatch(true);
-                    outtake.depositPosition(0, 0);
+                .splineTo(new Vector2d(12, 35), Math.toRadians(270))
+                .setReversed(true)
+                .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
+                    intake.intakePosition5th(0);
                 })
+                .UNSTABLE_addDisplacementMarkerOffset(30, ()->{
+                    outtake.depositPosition(0, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .splineTo(new Vector2d(48, 37), Math.toRadians(2.00))
+                .setReversed(false)
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                    outtake.transferPosition();
+                })
+                .waitSeconds(2.5)
                 .build();
-        TrajectorySequence right=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .lineToLinearHeading(new Pose2d(49, 31, Math.toRadians(180)))
-                .addDisplacementMarker(5, ()-> {
-                    outtake.setPixelLatch(true);
-                    outtake.depositPosition(0, 0);
+        TrajectorySequence right = drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
+                .splineTo(new Vector2d(8, 37), Math.toRadians(228.62))
+                .setReversed(true)
+                .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
+                    intake.intakePosition5th(0);
                 })
+                .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
+                    outtake.depositPosition(0, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .splineTo(new Vector2d(48, 31), Math.toRadians(2.00))
+                .setReversed(false)
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                    outtake.transferPosition();
+                })
+                .waitSeconds(2.5)
+                .build();
+
+        TrajectorySequence park_left=drive.trajectorySequenceBuilder(left.end())
+                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
+                .back(20)
+                .build();
+        TrajectorySequence park_middle=drive.trajectorySequenceBuilder(middle.end())
+                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
+                .back(20)
+                .build();
+        TrajectorySequence park_right=drive.trajectorySequenceBuilder(right.end())
+                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
+                .back(20)
                 .build();
 
 
@@ -121,102 +174,30 @@ public class BlueAuto extends LinearOpMode
         waitForStart();
 
         ElapsedTime timer=new ElapsedTime();
+        outtake.transferPosition();
         if (randomization==PropPosition.LEFT){
+            intake.transferPosition();
+            intake.setTarget(40);
             drive.setPoseEstimate(left.start());
-            intake.purplePosition(0);
-            intake.setPower(0.5);
-            outtake.transferPosition();
-            drive.followTrajectorySequence(left);
-            intake.purplePosition(300);
-            outtake.setPixelLatch(true);
-            outtake.depositPosition(0, -0.05);
-            timer.reset();
-            while (opModeIsActive() && timer.milliseconds()<2000){
-                intake.update();
-                outtake.update();
-            }
-            intake.setPower(-0.25);
-            outtake.setPixelLatch(false);
-            timer.reset();
-            while (opModeIsActive() && timer.milliseconds()<1400){
-                if (timer.milliseconds()>400){
-                    intake.setPower(0);
-                }
-                if (timer.milliseconds()>1000){
-                    intake.setServos(0.5, 0.2);
-                }
-            }
-            intake.setPower(0);
-            intake.intakePosition5th(0);
-            outtake.transferPosition();
-            outtake.setPixelLatch(false);
-            while (opModeIsActive() && timer.milliseconds()<5000){
-                intake.update();
-                outtake.update();
-            }
+            drive.followTrajectorySequenceAsync(left);
         }
         if (randomization==PropPosition.MIDDLE){
+            intake.transferPosition();
+            intake.setTarget(40);
             drive.setPoseEstimate(middle.start());
-            intake.purplePosition(0);
-            intake.setPower(0.5);
-            outtake.transferPosition();
-            drive.followTrajectorySequence(middle);
-            intake.purplePosition(500);
-            outtake.setPixelLatch(true);
-            outtake.depositPosition(0, -0.05);
-            timer.reset();
-            while (opModeIsActive() && timer.milliseconds()<2000){
-                intake.update();
-                outtake.update();
-            }
-            intake.setPower(-0.25);
-            outtake.setPixelLatch(false);
-            timer.reset();
-            while (opModeIsActive() && timer.milliseconds()<1000){
-                if (timer.milliseconds()>1000){
-                    intake.setPower(0);
-                }
-                if (timer.milliseconds()>700){
-                    intake.setServos(0.5, 0.2);
-                }
-            }
-            intake.setPower(0);
-            intake.intakePosition5th(0);
-            outtake.transferPosition();
-            outtake.setPixelLatch(false);
-            while (opModeIsActive() && timer.milliseconds()<5000){
-                intake.update();
-                outtake.update();
-            }
+            drive.followTrajectorySequenceAsync(middle);
         }
         if (randomization==PropPosition.RIGHT){
+            intake.transferPosition();
+            intake.setTarget(40);
             drive.setPoseEstimate(right.start());
-            intake.purplePosition(0);
-            intake.setPower(0.5);
-            outtake.transferPosition();
-            drive.followTrajectorySequence(right);
-            intake.purplePosition(820);
-            outtake.setPixelLatch(true);
-            outtake.depositPosition(0, 0);
-            timer.reset();
-            while (opModeIsActive() && timer.milliseconds()<2000){
-                intake.update();
-                outtake.update();
-            }
-            intake.setPower(-0.1);
-            outtake.setPixelLatch(false);
-            timer.reset();
-            while (opModeIsActive() && timer.milliseconds()<1000){
-
-            }
-            intake.setPower(0);
-            intake.intakePosition5th(0);
-            outtake.transferPosition();
-            outtake.setPixelLatch(false);
-            while (opModeIsActive() && timer.milliseconds()<2000){
-                intake.update();
-                outtake.update();
-            }
+            drive.followTrajectorySequenceAsync(right);
         }
+        while (drive.isBusy() && opModeIsActive()){
+            drive.update();
+            intake.update();
+            outtake.update();
+        }
+
     }
 }
