@@ -20,6 +20,9 @@ public class Outtake {
     public PIDFController intakeController=new PIDFController(0.01, 0, 0, 0);
     public static double kf=0.11;
     public static int positionTolerance=10;
+
+    public static int startPosition=0;
+
     public void init(HardwareMap hardwareMap){
         outtake1=new Motor(hardwareMap, "depositfirst1", Motor.GoBILDA.RPM_1150);
         outtake2=new Motor(hardwareMap, "depositsecond2", Motor.GoBILDA.RPM_1150);
@@ -37,6 +40,8 @@ public class Outtake {
 
         turretEncoder=hardwareMap.analogInput.get("turretencoder");
         flipEncoder=hardwareMap.analogInput.get("flipencoder");
+
+        startPosition=this.getEncoderPos();
     }
     public void setTarget(int setPoint){
         intakeController.setSetPoint(setPoint);
@@ -57,7 +62,7 @@ public class Outtake {
         }
     }
     public int getEncoderPos(){
-        return outtake1.getCurrentPosition();
+        return outtake1.getCurrentPosition()-startPosition;
     }
     public double[] readAxonAnalog(){
         double[] degrees = new double[2];

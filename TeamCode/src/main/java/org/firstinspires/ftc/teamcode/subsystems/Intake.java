@@ -26,6 +26,9 @@ public class Intake {
     public PIDFController intakeController=new PIDFController(0.003, 0, 0, 0);
     public static double kF=0.4;
     public static double positionTolerance=20;
+
+    public static int startPosition=0;
+
     public void init(HardwareMap hardwareMap){
         intakemotor=new Motor(hardwareMap, "intake0", Motor.GoBILDA.RPM_1150);
         intakeheights=(ServoImplEx) hardwareMap.servo.get("intakeheights0");
@@ -40,6 +43,9 @@ public class Intake {
         intakeservo1.setDirection(DcMotorSimple.Direction.REVERSE);
         intakemotor.setInverted(true);
         intakemotor.resetEncoder();
+
+        startPosition=this.getEncoderPos();
+
     }
     public void setTarget(int setPoint){
         intakeController.setSetPoint(setPoint);
@@ -68,7 +74,7 @@ public class Intake {
         }
     }
     public int getEncoderPos(){
-        return intakemotor.getCurrentPosition();
+        return intakemotor.getCurrentPosition()-startPosition;
     }
     public double readHeightAnalog(){
         return intakeheightsEncoder.getVoltage()*360/3.3;
