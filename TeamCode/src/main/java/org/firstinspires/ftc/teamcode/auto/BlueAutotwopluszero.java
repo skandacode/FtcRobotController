@@ -22,7 +22,7 @@ import java.util.Objects;
 
 @Config
 @Autonomous
-public class BlueAutoPurplePixel extends LinearOpMode
+public class BlueAutotwopluszero extends LinearOpMode
 {
     OpenCvWebcam webcam;
     PropPosition randomization=PropPosition.NONE;

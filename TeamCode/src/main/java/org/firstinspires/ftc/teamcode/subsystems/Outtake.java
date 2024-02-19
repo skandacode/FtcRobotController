@@ -6,6 +6,7 @@ import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -18,6 +19,7 @@ public class Outtake {
     boolean scoring=false;
     public PIDFController intakeController=new PIDFController(0.01, 0, 0, 0);
     public static double kf=0.11;
+    public static int positionTolerance=10;
     public void init(HardwareMap hardwareMap){
         outtake1=new Motor(hardwareMap, "depositfirst1", Motor.GoBILDA.RPM_1150);
         outtake2=new Motor(hardwareMap, "depositsecond2", Motor.GoBILDA.RPM_1150);
@@ -47,7 +49,7 @@ public class Outtake {
             double targetPower = intakeController.calculate(this.getEncoderPos());
             outtakeMotors.set(targetPower+kf);
         }else{
-            if (this.getEncoderPos()<5){
+            if (this.getEncoderPos()<positionTolerance){
                 outtakeMotors.set(0+kf);
             }else{
                 outtakeMotors.set(-1+kf);

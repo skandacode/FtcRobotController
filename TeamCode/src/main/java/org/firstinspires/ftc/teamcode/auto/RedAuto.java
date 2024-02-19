@@ -33,8 +33,7 @@ public class RedAuto extends LinearOpMode
     public static String ObjectDirection;
 
     @Override
-    public void runOpMode()
-    {
+    public void runOpMode() throws InterruptedException{
         intake.init(hardwareMap);
         outtake.init(hardwareMap);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -104,7 +103,7 @@ public class RedAuto extends LinearOpMode
                 .waitSeconds(2.5)
                 .build();
         TrajectorySequence left = drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90.00)))
-                .splineTo(new Vector2d(8, 37), Math.toRadians(-228.62))
+                .splineTo(new Vector2d(8, -37), Math.toRadians(-228.62))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
@@ -113,7 +112,7 @@ public class RedAuto extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48, -31), Math.toRadians(-2.00))
+                .splineTo(new Vector2d(48, -29), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -158,8 +157,9 @@ public class RedAuto extends LinearOpMode
 
             }
         });
-
         waitForStart();
+        outtake.resetEncoder();
+        intake.resetEncoder();
         ElapsedTime timer=new ElapsedTime();
         outtake.transferPosition();
         if (randomization==PropPosition.LEFT){
@@ -184,6 +184,10 @@ public class RedAuto extends LinearOpMode
             drive.update();
             intake.update();
             outtake.update();
+            telemetry.addData("outtake position", outtake.getEncoderPos());
+            telemetry.addData("intake position", intake.getEncoderPos());
+
+            telemetry.update();
         }
     }
 }

@@ -5,6 +5,7 @@ import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PwmControl;
@@ -24,7 +25,7 @@ public class Intake {
 
     public PIDFController intakeController=new PIDFController(0.003, 0, 0, 0);
     public static double kF=0.4;
-    public static double positionTolerance=10;
+    public static double positionTolerance=20;
     public void init(HardwareMap hardwareMap){
         intakemotor=new Motor(hardwareMap, "intake0", Motor.GoBILDA.RPM_1150);
         intakeheights=(ServoImplEx) hardwareMap.servo.get("intakeheights0");
