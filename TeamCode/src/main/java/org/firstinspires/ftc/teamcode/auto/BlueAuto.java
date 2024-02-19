@@ -236,21 +236,17 @@ public class BlueAuto extends LinearOpMode
 
         ElapsedTime timer=new ElapsedTime();
         outtake.transferPosition();
+        intake.transferPosition();
+        intake.setTarget(60);
         if (randomization==PropPosition.LEFT){
-            intake.transferPosition();
-            intake.setTarget(40);
             drive.setPoseEstimate(left.start());
             drive.followTrajectorySequenceAsync(left);
         }
         if (randomization==PropPosition.MIDDLE){
-            intake.transferPosition();
-            intake.setTarget(40);
             drive.setPoseEstimate(middle.start());
             drive.followTrajectorySequenceAsync(middle);
         }
         if (randomization==PropPosition.RIGHT){
-            intake.transferPosition();
-            intake.setTarget(40);
             drive.setPoseEstimate(right.start());
             drive.followTrajectorySequenceAsync(right);
         }

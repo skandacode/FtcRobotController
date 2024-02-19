@@ -24,8 +24,8 @@ public class Intake {
     AnalogInput intakeheightsEncoder, intakeflapsEncoder;
 
     public PIDFController intakeController=new PIDFController(0.003, 0, 0, 0);
-    public static double kF=0.4;
-    public static double positionTolerance=20;
+    public static double kF=0.6;
+    public static double positionTolerance=10;
 
     public static int startPosition=0;
 
@@ -54,7 +54,7 @@ public class Intake {
         return intakeController.getSetPoint();
     }
     public void update(){
-        if (intakeController.getSetPoint()!=0) {
+        if (this.getTarget()!=0) {
             double targetPower = intakeController.calculate(this.getEncoderPos());
             if (Math.abs(this.getEncoderPos()-intakeController.getSetPoint())>positionTolerance) {
                 if (this.getEncoderPos() > intakeController.getSetPoint()) {

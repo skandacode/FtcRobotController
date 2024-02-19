@@ -19,7 +19,7 @@ public class Outtake {
     boolean scoring=false;
     public PIDFController intakeController=new PIDFController(0.01, 0, 0, 0);
     public static double kf=0.11;
-    public static int positionTolerance=10;
+    public static int positionTolerance=30;
 
     public static int startPosition=0;
 
@@ -50,7 +50,7 @@ public class Outtake {
         return intakeController.getSetPoint();
     }
     public void update(){
-        if (intakeController.getSetPoint()!=0) {
+        if (this.getTarget()!=0) {
             double targetPower = intakeController.calculate(this.getEncoderPos());
             outtakeMotors.set(targetPower+kf);
         }else{
