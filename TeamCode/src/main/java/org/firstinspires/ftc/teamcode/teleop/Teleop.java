@@ -43,7 +43,7 @@ public class Teleop extends LinearOpMode {
         double loopTime=0.0;
         StateMachine transferMachine= new StateMachineBuilder()
                 .state(TransferStates.IDLE)
-                .transition(()->gamepad1.touchpad)
+                .transition(()->gamepad2.b)
 
                 .state(TransferStates.RETRACT)
                 .onEnter(()-> {
@@ -53,7 +53,7 @@ public class Teleop extends LinearOpMode {
                 .transition(()->intake.canEject())
 
                 .state(TransferStates.REVERSEINTAKE)
-                .onEnter(()-> intake.setPower(-1))
+                .onEnter(()-> intake.setPower(-0.2))
                 .transitionTimed(1)
 
                 .state(TransferStates.PUTDOWN)
@@ -64,52 +64,75 @@ public class Teleop extends LinearOpMode {
                 .transitionTimed(0.5, TransferStates.IDLE)
                 .build();
         waitForStart();
+        int currentheight=0;
+        boolean prevLeftTrigger=false;
+        boolean prevRightTrigger=false;
+
         transferMachine.start();
         while (opModeIsActive()){
             hubs.forEach(LynxModule::clearBulkCache);
             if (gamepad1.right_bumper){
                 drive.driveRobotCentric(-gamepad1.left_stick_x*0.3, gamepad1.left_stick_y*0.3, -gamepad1.right_stick_x*0.3);
             }else{
-                drive.driveRobotCentric(-gamepad1.left_stick_x, gamepad1.left_stick_y, -gamepad1.right_stick_x);
+                drive.driveRobotCentric(-gamepad1.left_stick_x, gamepad1.left_stick_y, -gamepad1.right_stick_x*0.7);
             }
 
-            if (gamepad1.y){
-                intake.intakePosition(800);
+            if (gamepad2.y){
+                intake.intakePosition(500);
                 intake.setPower(1);
             }
-            if (gamepad1.a){
+            if (gamepad2.a){
                 intake.intakePosition(0);
                 intake.setPower(1);
             }
-            if (gamepad1.b){
-                if (transferMachine.getState()==TransferStates.IDLE){
+            if (gamepad2.x) {
+                if (transferMachine.getState() == TransferStates.IDLE) {
                     intake.setPower(0);
-                    intake.intakePosition(0);
+                    intake.intakePosition3rd(0);
                 }
             }
+            boolean currRightTrigger=gamepad2.right_trigger>0.5;
+            boolean currLeftTrigger=gamepad2.left_trigger>0.5;
 
-            if (gamepad1.dpad_up){//score deposit
-                outtake.depositPosition(300, 0);
+            if (currRightTrigger && !prevRightTrigger){
+                if (currentheight<700) {
+                    currentheight = currentheight + 100;
+                }
+                outtake.depositPosition(currentheight, 0);
+            }
+            if (currLeftTrigger && !prevLeftTrigger){
+                if (currentheight>0){
+                    currentheight=currentheight-100;
+                }
+                outtake.depositPosition(currentheight, 0);
+            }
+            prevRightTrigger=currRightTrigger;
+            prevLeftTrigger=currLeftTrigger;
+
+
+            if (gamepad2.dpad_up){//score deposit
+                outtake.depositPosition(currentheight, 0);
                 outtake.setPixelLatch(true);
             }
-            if (gamepad1.dpad_down){//retract
+            if (gamepad2.touchpad){//retract
                 outtake.transferPosition();
                 outtake.setPixelLatch(false);
+                currentheight=0;
             }
-            if (gamepad1.right_bumper || !outtake.getScoring()){
+            if (gamepad2.right_bumper || !outtake.getScoring()){
                 outtake.setPixelLatch(false);
             }else{
                 outtake.setPixelLatch(true);
             }
-            if (gamepad1.share && gamepad1.options){
+            if (gamepad2.share && gamepad2.options){
                 intake.resetEncoder();
                 outtake.resetEncoder();
             }
-            if (gamepad2.right_bumper){
+            if (gamepad1.right_trigger>0.5){
                 hang.retract();
-            } else if (gamepad2.left_bumper){
+            } else if (gamepad1.left_trigger>0.5){
                 hang.raise();
-            }else if (gamepad2.touchpad){
+            }else if (gamepad1.left_stick_button && gamepad1.right_stick_button){
                 hang.hang();
             }else{
                 hang.release();
@@ -123,7 +146,7 @@ public class Teleop extends LinearOpMode {
             telemetry.addData("hz ", 1000000000 / (loop - loopTime));
             telemetry.addData("intake pos", intake.getEncoderPos());
             telemetry.addData("outtake pos", outtake.getEncoderPos());
-
+            telemetry.addData("Current height", currentheight);
             loopTime = loop;
             telemetry.update();
         }
