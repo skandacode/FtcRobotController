@@ -147,7 +147,7 @@ public class BlueAuto extends LinearOpMode
         TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d(46.24, 25.17, Math.toRadians(220)))
                 .splineTo(new Vector2d(-30.25, 10.00), Math.toRadians(181.00))
                 .addTemporalMarker(()->{
-                    intake.intakePosition5th(800);
+                    intake.intakePosition4th(800);
                     intake.setPower(1);
                 })
                 .setReversed(true)
@@ -160,7 +160,7 @@ public class BlueAuto extends LinearOpMode
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                     intake.setPower(0);
-                    intake.intakePosition5th(0);
+                    intake.intakePosition4th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3.5, ()->{
                     outtake.depositPosition(300, -0.4);
@@ -177,7 +177,7 @@ public class BlueAuto extends LinearOpMode
                 })
                 .splineTo(new Vector2d(-30.25, 10.00), Math.toRadians(180.00))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
-                    intake.intakePosition3rd(800);
+                    intake.intakePosition2nd(800);
                     intake.setPower(1);
                 })
                 .setReversed(true)
@@ -190,7 +190,7 @@ public class BlueAuto extends LinearOpMode
                 })*/
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                     //intake.setPower(0);
-                    intake.intakePosition3rd(0);
+                    intake.intakePosition2nd(0);
                 })
                 /*.UNSTABLE_addTemporalMarkerOffset(3.5, ()->{
                     outtake.depositPosition(300, 0.2);

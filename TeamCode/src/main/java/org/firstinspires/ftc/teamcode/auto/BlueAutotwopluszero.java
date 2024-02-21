@@ -71,7 +71,7 @@ public class BlueAutotwopluszero extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48, 43), Math.toRadians(2.00))
+                .splineTo(new Vector2d(48.5, 43), Math.toRadians(2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -92,7 +92,7 @@ public class BlueAutotwopluszero extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48, 37), Math.toRadians(2.00))
+                .splineTo(new Vector2d(48.5, 37), Math.toRadians(2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -112,7 +112,7 @@ public class BlueAutotwopluszero extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48, 31), Math.toRadians(2.00))
+                .splineTo(new Vector2d(48.5, 30), Math.toRadians(2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);

@@ -72,12 +72,138 @@ public class BlueFarCycle extends LinearOpMode
 
         TrajectorySequence left = drive.trajectorySequenceBuilder(new Pose2d(-36.11, 62.17, Math.toRadians(270.00)))
                 .splineTo(new Vector2d(-32.23, 39.31), Math.toRadians(-42.71))
+                .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
+                    intake.intakePosition5th(0);
+                    intake.setPower(1);
+                })
+                .lineToSplineHeading(new Pose2d(-49, 49, Math.toRadians(207)))
+                .forward(10)
+                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
+                    intake.setPower(-0.2);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
+                    intake.setPower(0);
+                    intake.intakePosition5th(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
+                    outtake.depositPosition(0, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
+                .splineTo(new Vector2d(47, 41), Math.toRadians(0.00))
+                .setReversed(false)
+                //change this
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                    outtake.setPixelLatch(false);
+                })
+                .waitSeconds(1)
+                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                    outtake.transferPosition();
+                })
+                .splineTo(new Vector2d(-9, 58), Math.toRadians(180))
+                .splineTo(new Vector2d(-49, 49), Math.toRadians(209))
+                .UNSTABLE_addDisplacementMarkerOffset(-5, ()->{
+                    intake.intakePosition2nd(250);
+                    intake.setPower(1);
+                })
+                .waitSeconds(2)
+                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
+                    intake.setPower(-0.2);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
+                    intake.setPower(0);
+                    intake.intakePosition5th(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
+                    outtake.depositPosition(150, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
+                .splineTo(new Vector2d(45, 39), Math.toRadians(0.00))
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                    outtake.transferPosition();
+                    intake.intakePosition(0);
+                })
+                .waitSeconds(2)
                 .build();
         TrajectorySequence middle = drive.trajectorySequenceBuilder(new Pose2d(-36.11, 62.17, Math.toRadians(270.00)))
                 .splineTo(new Vector2d(-36.11, 34.51), Math.toRadians(270.00))
+                .setReversed(true)
+                .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
+                    intake.intakePosition5th(0);
+                    intake.setPower(1);
+                })
+                .splineTo(new Vector2d(-49, 49), 120)
                 .build();
         TrajectorySequence right = drive.trajectorySequenceBuilder(new Pose2d(-36.11, 62.17, Math.toRadians(270.00)))
                 .lineToConstantHeading(new Vector2d(-49, 39.31))
+                .setReversed(true)
+                .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
+                    intake.intakePosition5th(0);
+                })
+                .lineToLinearHeading(new Pose2d(-49, 49, 230))
+                .addDisplacementMarker(()->{
+                    intake.setTarget(600);
+                })
+                .waitSeconds(2)
+                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
+                    intake.setPower(-0.2);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
+                    intake.setPower(0);
+                    intake.intakePosition5th(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
+                    outtake.depositPosition(0, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
+                .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))
+                .setReversed(false)
+                //change this
+                .lineTo(new Vector2d(46, 26))
+                .UNSTABLE_addDisplacementMarkerOffset(0.5, ()->{
+                    outtake.setPixelLatch(false);
+                })
+                .waitSeconds(1)
+                .splineTo(new Vector2d(-9, 58), Math.toRadians(180))
+                .splineTo(new Vector2d(-49, 49), Math.toRadians(220))
+                .UNSTABLE_addDisplacementMarkerOffset(-5, ()->{
+                    intake.intakePosition3rd(600);
+                })
+                .waitSeconds(2)
+                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
+                    intake.setPower(-0.2);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
+                    intake.setPower(0);
+                    intake.intakePosition5th(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
+                    outtake.depositPosition(0, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
+                .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))
                 .build();
 
         while (opModeInInit()){

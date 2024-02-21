@@ -99,7 +99,13 @@ public class Intake {
         this.setTarget(extend);
         this.setServos(0.73, 0.25);
     }
+
     public void intakePosition5th(int extend){
+        this.setTarget(extend);
+        //set servos
+        this.setServos(0.73, 0.5);
+    }
+    public void intakePosition4th(int extend){
         this.setTarget(extend);
         //set servos
         this.setServos(0.75, 0.5);
@@ -109,10 +115,15 @@ public class Intake {
         //set servos
         this.setServos(0.78, 0.5);
     }
+    public void intakePosition2nd(int extend){
+        this.setTarget(extend);
+        //set servos
+        this.setServos(0.79, 0.5);
+    }
     public void transferPosition(){
         this.setTarget(0);
         //set servos
-        setServos(0.24, 0.2);
+        setServos(0.23, 0.2);
 
     }
     public void setPower(double power){

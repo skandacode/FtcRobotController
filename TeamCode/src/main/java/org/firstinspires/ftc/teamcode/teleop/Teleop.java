@@ -132,7 +132,7 @@ public class Teleop extends LinearOpMode {
                 hang.retract();
             } else if (gamepad1.left_trigger>0.5){
                 hang.raise();
-            }else if (gamepad1.left_stick_button && gamepad1.right_stick_button){
+            }else if (gamepad2.left_stick_button && gamepad2.right_stick_button){
                 hang.hang();
             }else{
                 hang.release();

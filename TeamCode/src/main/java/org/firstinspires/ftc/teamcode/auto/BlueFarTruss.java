@@ -79,7 +79,7 @@ public class BlueFarTruss extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(46, 43), Math.toRadians(0.00))
+                .splineTo(new Vector2d(46.8, 43), Math.toRadians(0.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -104,7 +104,7 @@ public class BlueFarTruss extends LinearOpMode
                 })
                 .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))
                 .setReversed(false)
-                .lineTo(new Vector2d(46, 34))
+                .lineTo(new Vector2d(46.5, 34))
                 .waitSeconds(0.5)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
