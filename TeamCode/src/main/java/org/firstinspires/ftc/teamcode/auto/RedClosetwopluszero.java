@@ -9,8 +9,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.auto.notshown.BluePipeline;
 import org.firstinspires.ftc.teamcode.auto.notshown.PropPosition;
+import org.firstinspires.ftc.teamcode.auto.notshown.RedPipeline;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Outtake;
@@ -20,30 +20,27 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-import java.util.Objects;
-
+import java.util.*;
+import java.lang.*;
 @Config
 @Autonomous
-public class BlueAutotwopluszero extends LinearOpMode
+public class RedClosetwopluszero extends LinearOpMode
 {
     OpenCvWebcam webcam;
     PropPosition randomization=PropPosition.NONE;
     Intake intake = new Intake();
     Outtake outtake = new Outtake();
 
-
     public static String ObjectDirection;
 
     @Override
-    public void runOpMode()
-    {
+    public void runOpMode() throws InterruptedException{
         intake.init(hardwareMap);
         outtake.init(hardwareMap);
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
-
-        BluePipeline pipeline = new BluePipeline(telemetry, ObjectDirection);
+        RedPipeline pipeline = new RedPipeline(telemetry, ObjectDirection);
         webcam.setPipeline(pipeline);
         FtcDashboard.getInstance().startCameraStream(webcam, 0);
         webcam.setMillisecondsPermissionTimeout(5000); // Timeout for obtaining permission is configurable. Set before opening.
@@ -63,8 +60,10 @@ public class BlueAutotwopluszero extends LinearOpMode
                  */
             }
         });
-        TrajectorySequence left=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .lineTo(new Vector2d(27, 40))
+
+
+        TrajectorySequence right=drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90)))
+                .lineTo(new Vector2d(26, -40))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
@@ -73,7 +72,7 @@ public class BlueAutotwopluszero extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48.5, 43), Math.toRadians(2.00))
+                .splineTo(new Vector2d(48, -43), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -84,8 +83,8 @@ public class BlueAutotwopluszero extends LinearOpMode
                 .waitSeconds(2.5)
                 .build();
 
-        TrajectorySequence middle=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .splineTo(new Vector2d(12, 35), Math.toRadians(270))
+        TrajectorySequence middle=drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90.00)))
+                .splineTo(new Vector2d(12, -35), Math.toRadians(90))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
@@ -94,7 +93,7 @@ public class BlueAutotwopluszero extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48.5, 37), Math.toRadians(2.00))
+                .splineTo(new Vector2d(48, -37), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -104,8 +103,8 @@ public class BlueAutotwopluszero extends LinearOpMode
                 })
                 .waitSeconds(2.5)
                 .build();
-        TrajectorySequence right = drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .splineTo(new Vector2d(8, 37), Math.toRadians(228.62))
+        TrajectorySequence left = drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90.00)))
+                .splineTo(new Vector2d(6.5, -37), Math.toRadians(-228.62))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
@@ -114,7 +113,7 @@ public class BlueAutotwopluszero extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48.5, 30), Math.toRadians(2.00))
+                .splineTo(new Vector2d(48, -29), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -123,19 +122,6 @@ public class BlueAutotwopluszero extends LinearOpMode
                     outtake.transferPosition();
                 })
                 .waitSeconds(2.5)
-                .build();
-
-        TrajectorySequence park_left=drive.trajectorySequenceBuilder(left.end())
-                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
-                .back(20)
-                .build();
-        TrajectorySequence park_middle=drive.trajectorySequenceBuilder(middle.end())
-                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
-                .back(20)
-                .build();
-        TrajectorySequence park_right=drive.trajectorySequenceBuilder(right.end())
-                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
-                .back(20)
                 .build();
 
 
@@ -172,9 +158,9 @@ public class BlueAutotwopluszero extends LinearOpMode
 
             }
         });
-
         waitForStart();
-
+        outtake.resetEncoder();
+        intake.resetEncoder();
         ElapsedTime timer=new ElapsedTime();
         outtake.transferPosition();
         if (randomization==PropPosition.LEFT){
@@ -199,7 +185,10 @@ public class BlueAutotwopluszero extends LinearOpMode
             drive.update();
             intake.update();
             outtake.update();
-        }
+            telemetry.addData("outtake position", outtake.getEncoderPos());
+            telemetry.addData("intake position", intake.getEncoderPos());
 
+            telemetry.update();
+        }
     }
 }

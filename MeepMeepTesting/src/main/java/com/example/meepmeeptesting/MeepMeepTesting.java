@@ -4,6 +4,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.noahbres.meepmeep.MeepMeep;
 import com.noahbres.meepmeep.roadrunner.DefaultBotBuilder;
+import com.noahbres.meepmeep.roadrunner.SampleMecanumDrive;
 import com.noahbres.meepmeep.roadrunner.entity.RoadRunnerBotEntity;
 
 public class MeepMeepTesting {
@@ -12,19 +13,69 @@ public class MeepMeepTesting {
 
         RoadRunnerBotEntity myBot = new DefaultBotBuilder(meepMeep)
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
-                .setConstraints(50, 50, Math.toRadians(120), Math.toRadians(120), 10.5)
+                .setConstraints(35, 35, Math.toRadians(70), Math.toRadians(70), 10.5)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(-36.11, 62.17, Math.toRadians(270.00)))
-                                .lineToConstantHeading(new Vector2d(-49, 39.31))
+                        drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
+                                .lineTo(new Vector2d(27, 40))
                                 .setReversed(true)
                                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                                     //intake.intakePosition5th(0);
                                 })
-                                .lineToLinearHeading(new Pose2d(-49, 49, 230))
-                                .addDisplacementMarker(()->{
-                                    //intake.setTarget(600);
+                                .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
+                                    //outtake.depositPosition(0, 0);
+                                    //outtake.setPixelLatch(true);
+                                })
+                                .splineTo(new Vector2d(48.5, 44), Math.toRadians(0.00))
+                                .setReversed(false)
+                                .addTemporalMarker(()->{
+                                    //outtake.setPixelLatch(false);
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                                    //outtake.transferPosition();
                                 })
                                 .waitSeconds(2)
+                                .lineTo(new Vector2d(30, 15))
+                                .splineToConstantHeading(new Vector2d(12, 12), Math.toRadians(180))
+                                .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
+                                    //intake.intakePosition4th(900);
+                                    //intake.setPower(1);
+                                })
+                                .lineToSplineHeading(new Pose2d(-27, 12, Math.toRadians(180)))
+                                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                                    //intake.transferPosition();
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(1.1, ()->{
+                                    //intake.setPower(-0.2);
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
+                                    //intake.setPower(0);
+                                    //intake.intakePosition5th(60);
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
+                                    //outtake.depositPosition(300, 0);
+                                    //outtake.setPixelLatch(true);
+                                })
+                                .setReversed(true)
+                                .lineToSplineHeading(new Pose2d(20, 12, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(60.00))
+                                .setReversed(false)
+                                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                                    //outtake.depositPosition(300, 0);
+                                })
+                                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                                    //outtake.setPixelLatch(false);
+                                })
+                                .waitSeconds(1.5)
+                                .addTemporalMarker(()->{
+                                    //outtake.transferPosition();
+                                })
+                                .lineTo(new Vector2d(30, 15))
+                                .splineToConstantHeading(new Vector2d(12, 12), Math.toRadians(180))
+                                .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
+                                    //intake.intakePosition2nd(900);
+                                    //intake.setPower(1);
+                                })
+                                .lineToSplineHeading(new Pose2d(-29, 12, Math.toRadians(180)))
                                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                                     //intake.transferPosition();
                                 })
@@ -33,45 +84,21 @@ public class MeepMeepTesting {
                                 })
                                 .UNSTABLE_addTemporalMarkerOffset(2, ()->{
                                     //intake.setPower(0);
-                                    //intake.intakePosition5th(0);
+                                    //intake.intakePosition5th(60);
                                 })
                                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                                    //outtake.depositPosition(0, 0);
+                                    //outtake.depositPosition(300, 0);
                                     //outtake.setPixelLatch(true);
                                 })
                                 .setReversed(true)
-                                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
-                                .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))
-                                .setReversed(false)
-                                //change this
-                                .lineTo(new Vector2d(46, 26))
-                                .UNSTABLE_addDisplacementMarkerOffset(0.5, ()->{
+                                .lineToSplineHeading(new Pose2d(20, 12, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(60.00))
+                                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                                     //outtake.setPixelLatch(false);
                                 })
                                 .waitSeconds(1)
-                                .splineTo(new Vector2d(-9, 58), Math.toRadians(180))
-                                .splineTo(new Vector2d(-49, 49), Math.toRadians(220))
-                                .UNSTABLE_addDisplacementMarkerOffset(-5, ()->{
-                                    //intake.intakePosition3rd(600);
-                                })
-                                .waitSeconds(2)
-                                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
-                                    //intake.transferPosition();
-                                })
-                                .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
-                                    //intake.setPower(-0.2);
-                                })
-                                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
-                                    //intake.setPower(0);
-                                    //intake.intakePosition5th(0);
-                                })
-                                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                                    //outtake.depositPosition(0, 0);
-                                    //outtake.setPixelLatch(true);
-                                })
-                                .setReversed(true)
-                                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
-                                .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))
+                                .lineTo(new Vector2d(30, 12))
+                                .lineTo(new Vector2d(60, 12))
                                 .build()
                 );
 

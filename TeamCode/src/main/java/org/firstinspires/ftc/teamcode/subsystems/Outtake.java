@@ -79,7 +79,7 @@ public class Outtake {
             depositFlip.setPosition(0.7);
         }else{
             //set position
-            depositFlip.setPosition(0.2);
+            depositFlip.setPosition(0.18);
         }
 
         if (extended){
@@ -87,7 +87,7 @@ public class Outtake {
             depositExtendo.setPosition(0.3);
         }else{
             //set position
-            depositExtendo.setPosition(0.9);
+            depositExtendo.setPosition(0.89);
         }
     }
     public void setPixelLatch(boolean latchClosed){

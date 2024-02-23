@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.notshown;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -9,10 +9,13 @@ import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.auto.notshown.BluePipeline;
+import org.firstinspires.ftc.teamcode.auto.notshown.PropPosition;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Outtake;
@@ -30,7 +33,8 @@ import java.util.Objects;
 
 @Config
 @Autonomous
-public class BlueAutoWIthAtags extends LinearOpMode
+@Disabled
+public class BlueAuto extends LinearOpMode
 {
     OpenCvWebcam webcam;
     PropPosition randomization=PropPosition.NONE;
@@ -43,13 +47,11 @@ public class BlueAutoWIthAtags extends LinearOpMode
 
     @Override
     public void runOpMode() throws InterruptedException{
-        System.out.println("starting");
         List<LynxModule> hubs = hardwareMap.getAll(LynxModule.class);
         hubs.forEach(hub -> hub.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL));
         intake.init(hardwareMap);
         outtake.init(hardwareMap);
-        int cameraMonitorViewId;
-        cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
@@ -57,7 +59,6 @@ public class BlueAutoWIthAtags extends LinearOpMode
         webcam.setPipeline(pipeline);
         FtcDashboard.getInstance().startCameraStream(webcam, 0);
         webcam.setMillisecondsPermissionTimeout(5000); // Timeout for obtaining permission is configurable. Set before opening.
-        System.out.println("after setting timeout");
         webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener()
         {
             @Override
@@ -72,9 +73,10 @@ public class BlueAutoWIthAtags extends LinearOpMode
                 /*
                  * This will be called if the camera could not be opened
                  */
-                System.out.println("could not be opened");
             }
         });
+
+        StackState currentHeight=StackState.TOP;
 
 
         TrajectorySequence left=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
@@ -140,9 +142,9 @@ public class BlueAutoWIthAtags extends LinearOpMode
                 .build();
 
         TrajectorySequence cycle = drive.trajectorySequenceBuilder(new Pose2d(46.24, 25.17, Math.toRadians(220)))
-                .splineTo(new Vector2d(-27.25, 10.00), Math.toRadians(181.00))
+                .splineTo(new Vector2d(-30.25, 10.00), Math.toRadians(181.00))
                 .addTemporalMarker(()->{
-                    intake.intakePosition5th(800);
+                    intake.intakePosition4th(800);
                     intake.setPower(1);
                 })
                 .setReversed(true)
@@ -155,13 +157,13 @@ public class BlueAutoWIthAtags extends LinearOpMode
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                     intake.setPower(0);
-                    intake.intakePosition5th(0);
+                    intake.intakePosition4th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3.5, ()->{
                     outtake.depositPosition(300, -0.4);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(45.24, 25.17), Math.toRadians(220+180))
+                .splineTo(new Vector2d(43.24, 25.17), Math.toRadians(220+180))
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     outtake.setPixelLatch(false);
                 })
@@ -170,9 +172,9 @@ public class BlueAutoWIthAtags extends LinearOpMode
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
                     outtake.transferPosition();
                 })
-                .splineTo(new Vector2d(-26.25, 10.00), Math.toRadians(180.00))
+                .splineTo(new Vector2d(-30.25, 10.00), Math.toRadians(180.00))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
-                    intake.intakePosition3rd(800);
+                    intake.intakePosition2nd(800);
                     intake.setPower(1);
                 })
                 .setReversed(true)
@@ -185,12 +187,12 @@ public class BlueAutoWIthAtags extends LinearOpMode
                 })*/
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                     //intake.setPower(0);
-                    intake.intakePosition3rd(0);
+                    intake.intakePosition2nd(0);
                 })
                 /*.UNSTABLE_addTemporalMarkerOffset(3.5, ()->{
                     outtake.depositPosition(300, 0.2);
                 })*/
-                .splineTo(new Vector2d(45, 25.17), Math.toRadians(220+180))
+                .splineTo(new Vector2d(43, 25.17), Math.toRadians(220+180))
                 .build();
 
         while (opModeInInit()){
@@ -228,31 +230,20 @@ public class BlueAutoWIthAtags extends LinearOpMode
         });
 
         waitForStart();
-        aprilTag = new AprilTagProcessor.Builder()
-                .build();
 
-        VisionPortal.Builder builder = new VisionPortal.Builder();
-        builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"));
-        builder.addProcessor(aprilTag);
-        // Build the Vision Portal, using the above settings.
-        visionPortal = builder.build();
         ElapsedTime timer=new ElapsedTime();
         outtake.transferPosition();
+        intake.transferPosition();
+        intake.setTarget(60);
         if (randomization==PropPosition.LEFT){
-            intake.transferPosition();
-            intake.setTarget(40);
             drive.setPoseEstimate(left.start());
             drive.followTrajectorySequenceAsync(left);
         }
         if (randomization==PropPosition.MIDDLE){
-            intake.transferPosition();
-            intake.setTarget(40);
             drive.setPoseEstimate(middle.start());
             drive.followTrajectorySequenceAsync(middle);
         }
         if (randomization==PropPosition.RIGHT){
-            intake.transferPosition();
-            intake.setTarget(40);
             drive.setPoseEstimate(right.start());
             drive.followTrajectorySequenceAsync(right);
         }
@@ -266,13 +257,13 @@ public class BlueAutoWIthAtags extends LinearOpMode
 
             telemetry.addData("outtake position", outtake.getEncoderPos());
             telemetry.addData("intake position", intake.getEncoderPos());
-            Pose2d updated= telemetryAprilTag(drive.getPoseEstimate());
+            /*Pose2d updated= telemetryAprilTag(drive.getPoseEstimate());
             if (updated.equals(new Pose2d())){
 
             }else{
                 drive.setPoseEstimate(updated);
                 numberOfTimesRead++;
-            }
+            }*/
             telemetry.addData("times read", numberOfTimesRead);
             double loop = System.nanoTime();
             telemetry.addData("hz ", 1000000000 / (loop - loopTime));
@@ -285,13 +276,13 @@ public class BlueAutoWIthAtags extends LinearOpMode
             drive.update();
             intake.update();
             outtake.update();
-            Pose2d updated= telemetryAprilTag(drive.getPoseEstimate());
+            /*Pose2d updated= telemetryAprilTag(drive.getPoseEstimate());
             if (updated.equals(new Pose2d())){
 
             }else{
                 drive.setPoseEstimate(updated);
                 numberOfTimesRead++;
-            }
+            }*/
             telemetry.addData("outtake position", outtake.getEncoderPos());
             telemetry.addData("intake position", intake.getEncoderPos());
 

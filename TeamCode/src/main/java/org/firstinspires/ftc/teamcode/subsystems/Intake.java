@@ -88,7 +88,7 @@ public class Intake {
     }
     public void stay(int extend){
         this.setTarget(extend);
-        this.setServos(0.5, 0.5);
+        this.setServos(0.6, 0.5);
     }
     public void intakePosition(int extend){
         this.setTarget(extend);
@@ -108,7 +108,7 @@ public class Intake {
     public void intakePosition4th(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.75, 0.5);
+        this.setServos(0.745, 0.5);
     }
     public void intakePosition3rd(int extend){
         this.setTarget(extend);
@@ -118,12 +118,12 @@ public class Intake {
     public void intakePosition2nd(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.79, 0.5);
+        this.setServos(0.785, 0.5);
     }
     public void transferPosition(){
         this.setTarget(0);
         //set servos
-        setServos(0.23, 0.2);
+        setServos(0.23, 0.16);
 
     }
     public void setPower(double power){

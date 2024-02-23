@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.far;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.auto.notshown.PropPosition;
+import org.firstinspires.ftc.teamcode.auto.notshown.RedPipeline;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Outtake;
@@ -26,7 +28,7 @@ import java.util.Objects;
 
 @Config
 @Autonomous
-public class RedFarTruss extends LinearOpMode
+public class RedFar2plus2 extends LinearOpMode
 {
     OpenCvWebcam webcam;
     PropPosition randomization=PropPosition.NONE;
@@ -79,7 +81,7 @@ public class RedFarTruss extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(46, -45), Math.toRadians(0.00))
+                .splineTo(new Vector2d(46, -43), Math.toRadians(0.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -89,6 +91,39 @@ public class RedFarTruss extends LinearOpMode
                     outtake.transferPosition();
                     intake.intakePosition(0);
                 })
+                ////////////////////////////////////////////////////////////////////////////////////
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
+                .splineTo(new Vector2d(-56, -44), Math.toRadians(150))
+                //.splineTo(new Vector2d(-49, 49), Math.toRadians(216))
+                .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
+                    intake.intakePosition4th(0);
+                    intake.setPower(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
+                    intake.setPower(-0.2);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
+                    intake.setPower(0);
+                    intake.intakePosition5th(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
+                    outtake.depositPosition(150, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
+                .splineTo(new Vector2d(45, -39), Math.toRadians(0.00))
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                    outtake.transferPosition();
+                    intake.intakePosition(0);
+                })
+                .waitSeconds(2)
                 .build();
         TrajectorySequence middle = drive.trajectorySequenceBuilder(new Pose2d(-36.11, -62.17, Math.toRadians(90)))
                 .splineTo(new Vector2d(-36.11, -34.51), Math.toRadians(90))
@@ -104,7 +139,7 @@ public class RedFarTruss extends LinearOpMode
                 })
                 .splineTo(new Vector2d(43, -43), Math.toRadians(0.00))
                 .setReversed(false)
-                .lineTo(new Vector2d(46, -38))
+                .lineTo(new Vector2d(46, -36))
                 .waitSeconds(0.5)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -114,6 +149,38 @@ public class RedFarTruss extends LinearOpMode
                     outtake.transferPosition();
                     intake.intakePosition(0);
                 })
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
+                .splineTo(new Vector2d(-56, -41), Math.toRadians(150))
+                //.splineTo(new Vector2d(-49, 49), Math.toRadians(216))
+                .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
+                    intake.intakePosition4th(0);
+                    intake.setPower(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
+                    intake.setPower(-0.2);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
+                    intake.setPower(0);
+                    intake.intakePosition5th(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
+                    outtake.depositPosition(150, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
+                .splineTo(new Vector2d(45, -39), Math.toRadians(0.00))
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                    outtake.transferPosition();
+                    intake.intakePosition(0);
+                })
+                .waitSeconds(2)
                 .build();
         TrajectorySequence left = drive.trajectorySequenceBuilder(new Pose2d(-36.11, -62.17, Math.toRadians(90.00)))
                 .lineToConstantHeading(new Vector2d(-49, -39.31))
@@ -130,7 +197,7 @@ public class RedFarTruss extends LinearOpMode
                 })
                 .splineTo(new Vector2d(43, -43), Math.toRadians(0.00))
                 .setReversed(false)
-                .lineTo(new Vector2d(46, -30))
+                .lineTo(new Vector2d(46, -27))
                 .waitSeconds(0.5)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -140,6 +207,38 @@ public class RedFarTruss extends LinearOpMode
                     outtake.transferPosition();
                     intake.intakePosition(0);
                 })
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
+                .splineTo(new Vector2d(-56, -41), Math.toRadians(150))
+                //.splineTo(new Vector2d(-49, 49), Math.toRadians(216))
+                .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
+                    intake.intakePosition4th(0);
+                    intake.setPower(1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
+                    intake.setPower(-0.2);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2, ()->{
+                    intake.setPower(0);
+                    intake.intakePosition5th(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
+                    outtake.depositPosition(150, 0);
+                    outtake.setPixelLatch(true);
+                })
+                .setReversed(true)
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
+                .splineTo(new Vector2d(45, -39), Math.toRadians(0.00))
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1, ()->{
+                    outtake.transferPosition();
+                    intake.intakePosition(0);
+                })
+                .waitSeconds(2)
                 .build();
 
 

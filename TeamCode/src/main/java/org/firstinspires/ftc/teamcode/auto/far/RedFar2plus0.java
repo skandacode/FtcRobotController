@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.auto;
+package org.firstinspires.ftc.teamcode.auto.far;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.auto.notshown.PropPosition;
+import org.firstinspires.ftc.teamcode.auto.notshown.RedPipeline;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Outtake;
@@ -26,7 +28,7 @@ import java.util.Objects;
 
 @Config
 @Autonomous
-public class BlueFarTruss extends LinearOpMode
+public class RedFar2plus0 extends LinearOpMode
 {
     OpenCvWebcam webcam;
     PropPosition randomization=PropPosition.NONE;
@@ -47,7 +49,7 @@ public class BlueFarTruss extends LinearOpMode
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        BluePipeline pipeline = new BluePipeline(telemetry, ObjectDirection);
+        RedPipeline pipeline = new RedPipeline(telemetry, ObjectDirection);
         webcam.setPipeline(pipeline);
         FtcDashboard.getInstance().startCameraStream(webcam, 0);
         webcam.setMillisecondsPermissionTimeout(5000); // Timeout for obtaining permission is configurable. Set before opening.
@@ -67,19 +69,19 @@ public class BlueFarTruss extends LinearOpMode
                  */
             }
         });
-        TrajectorySequence left = drive.trajectorySequenceBuilder(new Pose2d(-36.11, 62.17, Math.toRadians(270.00)))
-                .splineTo(new Vector2d(-32.23, 39.31), Math.toRadians(-42.71))
+        TrajectorySequence right = drive.trajectorySequenceBuilder(new Pose2d(-36.11, -62.17, Math.toRadians(90)))
+                .splineTo(new Vector2d(-32.23, -39.31), Math.toRadians(42.71))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
                 })
-                .splineTo(new Vector2d(-35.08, 52.85), Math.toRadians(60))
-                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
+                .splineTo(new Vector2d(-35.08, -52.85), Math.toRadians(-60))
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(46.8, 43), Math.toRadians(0.00))
+                .splineTo(new Vector2d(46, -45), Math.toRadians(0.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -90,21 +92,21 @@ public class BlueFarTruss extends LinearOpMode
                     intake.intakePosition(0);
                 })
                 .build();
-        TrajectorySequence middle = drive.trajectorySequenceBuilder(new Pose2d(-36.11, 62.17, Math.toRadians(270.00)))
-                .splineTo(new Vector2d(-36.11, 34.51), Math.toRadians(270.00))
+        TrajectorySequence middle = drive.trajectorySequenceBuilder(new Pose2d(-36.11, -62.17, Math.toRadians(90)))
+                .splineTo(new Vector2d(-36.11, -34.51), Math.toRadians(90))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
                 })
-                .splineTo(new Vector2d(-35.08, 52.85), Math.toRadians(60))
-                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
+                .splineTo(new Vector2d(-35.08, -52.85), Math.toRadians(-60))
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))
+                .splineTo(new Vector2d(43, -43), Math.toRadians(0.00))
                 .setReversed(false)
-                .lineTo(new Vector2d(46.5, 34))
+                .lineTo(new Vector2d(46, -38))
                 .waitSeconds(0.5)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -115,22 +117,22 @@ public class BlueFarTruss extends LinearOpMode
                     intake.intakePosition(0);
                 })
                 .build();
-        TrajectorySequence right = drive.trajectorySequenceBuilder(new Pose2d(-36.11, 62.17, Math.toRadians(270.00)))
-                .lineToConstantHeading(new Vector2d(-49, 39.31))
+        TrajectorySequence left = drive.trajectorySequenceBuilder(new Pose2d(-36.11, -62.17, Math.toRadians(90.00)))
+                .lineToConstantHeading(new Vector2d(-49, -39.31))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
                 })
-                .splineTo(new Vector2d(-49, 49), 120)
+                .splineTo(new Vector2d(-49, -49), -120)
                 //.splineTo(new Vector2d(-35.08, 52.85), Math.toRadians(120))
-                .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
+                .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))
+                .splineTo(new Vector2d(43, -43), Math.toRadians(0.00))
                 .setReversed(false)
-                .lineTo(new Vector2d(46, 26))
+                .lineTo(new Vector2d(46, -30))
                 .waitSeconds(0.5)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
