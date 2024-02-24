@@ -15,33 +15,32 @@ public class MeepMeepTesting {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(35, 35, Math.toRadians(70), Math.toRadians(70), 10.5)
                 .followTrajectorySequence(drive ->
-                        drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                                .lineTo(new Vector2d(27, 42))
+                        drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90.00)))
+                                .splineTo(new Vector2d(12, -35), Math.toRadians(90))
                                 .setReversed(true)
                                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                                     //intake.stay(0);
                                 })
-                                .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
+                                .UNSTABLE_addDisplacementMarkerOffset(30, ()->{
                                     //outtake.depositPosition(0, 0);
                                     //outtake.setPixelLatch(true);
                                 })
-                                .splineTo(new Vector2d(48.5, 44), Math.toRadians(0.00))
+                                .splineTo(new Vector2d(48, -37), Math.toRadians(-2.00))
                                 .setReversed(false)
                                 .addTemporalMarker(()->{
-                                    //outtake.setPixelLatch(false);
+                                    ///outtake.setPixelLatch(false);
                                 })
+                                .waitSeconds(0.5)
                                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                                     //outtake.transferPosition();
                                 })
-                                .waitSeconds(2)
-                                .lineToLinearHeading(new Pose2d(30, 16, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
+                                .splineTo(new Vector2d(12, -12), Math.toRadians(180))
                                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                                     //intake.intakePosition4th(900);
                                     //intake.setPower(1);
                                 })
-                                .splineTo(new Vector2d(-27, 10), Math.toRadians(185))
-                                .waitSeconds(0.5)
+                                .splineTo(new Vector2d(-27, -13), Math.toRadians(181))//first pickup
+                                .waitSeconds(1)
                                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                                     //intake.transferPosition();
                                 })
@@ -57,8 +56,8 @@ public class MeepMeepTesting {
                                     //outtake.setPixelLatch(true);
                                 })
                                 .setReversed(true)
-                                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(75.00))
+                                .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(43.5, -35), Math.toRadians(-30.00))
                                 .setReversed(false)
                                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                                     //outtake.depositPosition(300, 0);
@@ -70,14 +69,13 @@ public class MeepMeepTesting {
                                 .addTemporalMarker(()->{
                                     //outtake.transferPosition();
                                 })
-                                .lineToLinearHeading(new Pose2d(30, 16, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
+                                .splineTo(new Vector2d(12, -12), Math.toRadians(180))
                                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
-                                    ///intake.intakePosition2nd(900);
+                                    //intake.intakePosition2nd(900);
                                     //intake.setPower(1);
                                 })
-                                .splineTo(new Vector2d(-29, 10), Math.toRadians(185))
-                                .waitSeconds(0.5)
+                                .splineTo(new Vector2d(-30, -14), Math.toRadians(190))//second pickup
+                                .waitSeconds(1)
                                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                                     //intake.transferPosition();
                                 })
@@ -92,9 +90,12 @@ public class MeepMeepTesting {
                                     //outtake.depositPosition(300, 0);
                                     //outtake.setPixelLatch(true);
                                 })
+                                .UNSTABLE_addTemporalMarkerOffset(3, ()->{
+                                    //intake.setTarget(0);
+                                })
                                 .setReversed(true)
-                                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(75.00))
+                                .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(43.5, -35), Math.toRadians(-30.00))
                                 .UNSTABLE_addTemporalMarkerOffset(0.1, ()->{
                                     //outtake.setPixelLatch(false);
                                 })

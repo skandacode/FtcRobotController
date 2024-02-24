@@ -88,7 +88,7 @@ public class Teleop extends LinearOpMode {
             if (gamepad2.x) {
                 if (transferMachine.getState() == TransferStates.IDLE) {
                     intake.setPower(0);
-                    intake.intakePosition3rd(0);
+                    intake.intakePosition2nd(0);
                 }
             }
             boolean currRightTrigger=gamepad2.right_trigger>0.5;
@@ -114,6 +114,9 @@ public class Teleop extends LinearOpMode {
                 outtake.depositPosition(currentheight, 0);
                 outtake.setPixelLatch(true);
             }
+            if (gamepad2.dpad_left){
+                intake.purplePosition(60);
+            }
             if (gamepad2.touchpad){//retract
                 outtake.transferPosition();
                 outtake.setPixelLatch(false);
@@ -123,6 +126,11 @@ public class Teleop extends LinearOpMode {
                 outtake.setPixelLatch(false);
             }else{
                 outtake.setPixelLatch(true);
+            }
+            if (gamepad1.y){
+                hang.releaseDrone();
+            }else{
+                hang.keepDrone();
             }
             if (gamepad2.share && gamepad2.options){
                 intake.resetEncoder();

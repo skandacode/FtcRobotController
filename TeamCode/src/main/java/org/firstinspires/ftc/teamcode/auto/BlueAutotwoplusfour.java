@@ -143,6 +143,9 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.depositPosition(300, 0);
                     outtake.setPixelLatch(true);
                 })
+                .UNSTABLE_addTemporalMarkerOffset(3, ()->{
+                    intake.setTarget(0);
+                })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
                 .splineToConstantHeading(new Vector2d(43, 35), Math.toRadians(75.00))
@@ -229,6 +232,9 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.depositPosition(300, 0);
                     outtake.setPixelLatch(true);
                 })
+                .UNSTABLE_addTemporalMarkerOffset(3, ()->{
+                    intake.setTarget(0);
+                })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
                 .splineToConstantHeading(new Vector2d(43, 35), Math.toRadians(30.00))
@@ -314,6 +320,9 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                     outtake.depositPosition(300, 0);
                     outtake.setPixelLatch(true);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(3, ()->{
+                    intake.setTarget(0);
                 })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))

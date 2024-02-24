@@ -48,6 +48,9 @@ public class Intake {
 
     }
     public void setTarget(int setPoint){
+        if (setPoint==60){
+            setPoint=80;
+        }
         intakeController.setSetPoint(setPoint);
     }
     public double getTarget(){
@@ -108,7 +111,7 @@ public class Intake {
     public void intakePosition4th(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.745, 0.5);
+        this.setServos(0.75, 0.5);
     }
     public void intakePosition3rd(int extend){
         this.setTarget(extend);
