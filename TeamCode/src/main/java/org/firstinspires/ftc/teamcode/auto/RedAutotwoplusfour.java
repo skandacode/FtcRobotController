@@ -4,8 +4,6 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.profile.VelocityConstraint;
-import com.acmerobotics.roadrunner.trajectory.constraints.MecanumVelocityConstraint;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -13,6 +11,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.auto.notshown.BluePipeline;
 import org.firstinspires.ftc.teamcode.auto.notshown.PropPosition;
+import org.firstinspires.ftc.teamcode.auto.notshown.RedPipeline;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
@@ -27,7 +26,7 @@ import java.util.Objects;
 
 @Config
 @Autonomous
-public class BlueAutotwoplusfour extends LinearOpMode
+public class RedAutotwoplusfour extends LinearOpMode
 {
     OpenCvWebcam webcam;
     PropPosition randomization=PropPosition.NONE;
@@ -46,7 +45,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         SampleMecanumDrive drive = new SampleMecanumDrive(hardwareMap);
 
-        BluePipeline pipeline = new BluePipeline(telemetry, ObjectDirection);
+        RedPipeline pipeline = new RedPipeline(telemetry, ObjectDirection);
         webcam.setPipeline(pipeline);
         FtcDashboard.getInstance().startCameraStream(webcam, 0);
         webcam.setMillisecondsPermissionTimeout(5000); // Timeout for obtaining permission is configurable. Set before opening.
@@ -66,17 +65,17 @@ public class BlueAutotwoplusfour extends LinearOpMode
                  */
             }
         });
-        TrajectorySequence left=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .lineTo(new Vector2d(27, 42))
+        TrajectorySequence left=drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90.00)))
+                .splineTo(new Vector2d(6.5, -37), Math.toRadians(-228.62))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
-                    intake.stay(0);
+                    intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48.5, 44), Math.toRadians(0.00))
+                .splineTo(new Vector2d(48, -29), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -85,14 +84,13 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.transferPosition();
                 })
                 .waitSeconds(2)
-                .lineToLinearHeading(new Pose2d(30, 16, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
+                .lineTo(new Vector2d(30, -15))
+                .splineToConstantHeading(new Vector2d(12, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition4th(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-25, 8), Math.toRadians(190))//first pickup
-                .waitSeconds(0.5)
+                .lineToSplineHeading(new Pose2d(-27, -12, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
                 })
@@ -101,15 +99,15 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2, ()->{
                     intake.setPower(0);
-                    intake.stay(60);
+                    intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                     outtake.depositPosition(300, 0);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
-                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(43, 35), Math.toRadians(75.00))
+                .lineToSplineHeading(new Pose2d(20, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(42, -35), Math.toRadians(-60.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     outtake.depositPosition(300, 0);
@@ -121,14 +119,13 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToLinearHeading(new Pose2d(30, 16, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
+                .lineTo(new Vector2d(30, -15))
+                .splineToConstantHeading(new Vector2d(12, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-25, 8), Math.toRadians(190))//second pickup
-                .waitSeconds(0.5)
+                .lineToSplineHeading(new Pose2d(-29, -12, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
                 })
@@ -137,34 +134,34 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2, ()->{
                     intake.setPower(0);
-                    intake.stay(60);
+                    intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                     outtake.depositPosition(300, 0);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
-                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(43, 35), Math.toRadians(75.00))
-                .UNSTABLE_addTemporalMarkerOffset(0.1, ()->{
+                .lineToSplineHeading(new Pose2d(20, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(42, -35), Math.toRadians(-60.00))
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     outtake.setPixelLatch(false);
                 })
                 .waitSeconds(1)
+                .lineTo(new Vector2d(30, -12))
+                .lineTo(new Vector2d(60, -12))
                 .build();
 
-        TrajectorySequence middle=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(35, Math.toRadians(70), DriveConstants.TRACK_WIDTH))
-                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(35))
-                .splineTo(new Vector2d(12, 35), Math.toRadians(270))
+        TrajectorySequence middle=drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90.00)))
+                .splineTo(new Vector2d(12, -35), Math.toRadians(90))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
-                    intake.intakePosition5th(60);
+                    intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(30, ()->{
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48.5, 37), Math.toRadians(2.00))
+                .splineTo(new Vector2d(48, -37), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -173,12 +170,12 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.transferPosition();
                 })
                 .waitSeconds(2)
-                .splineTo(new Vector2d(12, 12), Math.toRadians(180))
+                .splineTo(new Vector2d(12, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition4th(900);
                     intake.setPower(1);
                 })
-                .lineToSplineHeading(new Pose2d(-27, 12, Math.toRadians(180)))
+                .lineToSplineHeading(new Pose2d(-27, -12, Math.toRadians(180)))
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -195,8 +192,8 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
-                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(43, 35), Math.toRadians(30.00))
+                .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(43, -35), Math.toRadians(-30.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     outtake.depositPosition(300, 0);
@@ -208,15 +205,15 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .splineTo(new Vector2d(12, 12), Math.toRadians(180))
+                .splineTo(new Vector2d(12, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-30, 13), Math.toRadians(177))
+                .splineTo(new Vector2d(-30, -13), Math.toRadians(-177))
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
-                    intake.transferPosition();
+                     intake.transferPosition();
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1.3, ()->{
                     intake.setPower(-0.2);
@@ -230,27 +227,24 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
-                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(43, 35), Math.toRadians(30.00))
+                .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(43, -35), Math.toRadians(-30.00))
                 .UNSTABLE_addTemporalMarkerOffset(0.1, ()->{
                     outtake.setPixelLatch(false);
                 })
                 .waitSeconds(1)
                 .build();
-        TrajectorySequence right = drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(35, Math.toRadians(70), DriveConstants.TRACK_WIDTH))
-                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(35))
-
-                .splineTo(new Vector2d(8, 37), Math.toRadians(228.62))
+        TrajectorySequence right = drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90)))
+                .lineTo(new Vector2d(26, -40))
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
-                    intake.intakePosition5th(60);
+                    intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(47.5, 30), Math.toRadians(2.00))
+                .splineTo(new Vector2d(48, -43), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -259,12 +253,12 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.transferPosition();
                 })
                 .waitSeconds(1)
-                .splineTo(new Vector2d(12, 12), Math.toRadians(180))
+                .splineTo(new Vector2d(12, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition4th(900);
                     intake.setPower(1);
                 })
-                .lineToSplineHeading(new Pose2d(-27, 12, Math.toRadians(180)))
+                .lineToSplineHeading(new Pose2d(-27, -12, Math.toRadians(180)))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -281,8 +275,8 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
-                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(30.00))
+                .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(42, -35), Math.toRadians(-30.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     outtake.depositPosition(300, 0);
@@ -294,12 +288,12 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .splineTo(new Vector2d(12, 12), Math.toRadians(180))
+                .splineTo(new Vector2d(12, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-29, 12), Math.toRadians(182))
+                .splineTo(new Vector2d(-29, -17.5), Math.toRadians(180))
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -316,27 +310,13 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
-                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(30.00))
+                .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(42, -35), Math.toRadians(-30.00))
                 .UNSTABLE_addTemporalMarkerOffset(0.1, ()->{
                     outtake.setPixelLatch(false);
                 })
                 .waitSeconds(1)
                 .build();
-
-        TrajectorySequence park_left=drive.trajectorySequenceBuilder(left.end())
-                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
-                .back(20)
-                .build();
-        TrajectorySequence park_middle=drive.trajectorySequenceBuilder(middle.end())
-                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
-                .back(20)
-                .build();
-        TrajectorySequence park_right=drive.trajectorySequenceBuilder(right.end())
-                .splineToConstantHeading(new Vector2d(35, 61), Math.toRadians(90))
-                .back(20)
-                .build();
-
 
         while (opModeInInit()){
             telemetry.addData("Frame Count", webcam.getFrameCount());
@@ -399,10 +379,6 @@ public class BlueAutotwoplusfour extends LinearOpMode
             intake.update();
             outtake.update();
         }
-        timer.reset();
-        intake.setTarget(0);
-        while (timer.milliseconds()<200){
-            intake.update();
-        }
+
     }
 }

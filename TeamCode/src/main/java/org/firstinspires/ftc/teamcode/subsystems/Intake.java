@@ -127,8 +127,9 @@ public class Intake {
 
     }
     public void setPower(double power){
-        intakeservo1.setPower(power);
-        intakeservo2.setPower(power);
+        double actualPower=Math.min(power, 0.2);
+        intakeservo1.setPower(actualPower);
+        intakeservo2.setPower(actualPower);
     }
     public boolean canEject(){
         if (this.getEncoderPos()<=5){

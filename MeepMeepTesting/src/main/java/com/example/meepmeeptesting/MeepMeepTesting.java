@@ -16,10 +16,10 @@ public class MeepMeepTesting {
                 .setConstraints(35, 35, Math.toRadians(70), Math.toRadians(70), 10.5)
                 .followTrajectorySequence(drive ->
                         drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
-                                .lineTo(new Vector2d(27, 40))
+                                .lineTo(new Vector2d(27, 42))
                                 .setReversed(true)
                                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
-                                    //intake.intakePosition5th(0);
+                                    //intake.stay(0);
                                 })
                                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
                                     //outtake.depositPosition(0, 0);
@@ -34,13 +34,14 @@ public class MeepMeepTesting {
                                     //outtake.transferPosition();
                                 })
                                 .waitSeconds(2)
-                                .lineTo(new Vector2d(30, 15))
-                                .splineToConstantHeading(new Vector2d(12, 12), Math.toRadians(180))
+                                .lineToLinearHeading(new Pose2d(30, 16, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
                                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                                     //intake.intakePosition4th(900);
                                     //intake.setPower(1);
                                 })
-                                .lineToSplineHeading(new Pose2d(-27, 12, Math.toRadians(180)))
+                                .splineTo(new Vector2d(-27, 10), Math.toRadians(185))
+                                .waitSeconds(0.5)
                                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                                     //intake.transferPosition();
                                 })
@@ -49,15 +50,15 @@ public class MeepMeepTesting {
                                 })
                                 .UNSTABLE_addTemporalMarkerOffset(2, ()->{
                                     //intake.setPower(0);
-                                    //intake.intakePosition5th(60);
+                                    //intake.stay(60);
                                 })
                                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                                     //outtake.depositPosition(300, 0);
                                     //outtake.setPixelLatch(true);
                                 })
                                 .setReversed(true)
-                                .lineToSplineHeading(new Pose2d(20, 12, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(60.00))
+                                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(75.00))
                                 .setReversed(false)
                                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                                     //outtake.depositPosition(300, 0);
@@ -69,13 +70,14 @@ public class MeepMeepTesting {
                                 .addTemporalMarker(()->{
                                     //outtake.transferPosition();
                                 })
-                                .lineTo(new Vector2d(30, 15))
-                                .splineToConstantHeading(new Vector2d(12, 12), Math.toRadians(180))
+                                .lineToLinearHeading(new Pose2d(30, 16, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
                                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
-                                    //intake.intakePosition2nd(900);
+                                    ///intake.intakePosition2nd(900);
                                     //intake.setPower(1);
                                 })
-                                .lineToSplineHeading(new Pose2d(-29, 12, Math.toRadians(180)))
+                                .splineTo(new Vector2d(-29, 10), Math.toRadians(185))
+                                .waitSeconds(0.5)
                                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                                     //intake.transferPosition();
                                 })
@@ -84,21 +86,19 @@ public class MeepMeepTesting {
                                 })
                                 .UNSTABLE_addTemporalMarkerOffset(2, ()->{
                                     //intake.setPower(0);
-                                    //intake.intakePosition5th(60);
+                                    //intake.stay(60);
                                 })
                                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
                                     //outtake.depositPosition(300, 0);
                                     //outtake.setPixelLatch(true);
                                 })
                                 .setReversed(true)
-                                .lineToSplineHeading(new Pose2d(20, 12, Math.toRadians(180)))
-                                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(60.00))
-                                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                                .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
+                                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(75.00))
+                                .UNSTABLE_addTemporalMarkerOffset(0.1, ()->{
                                     //outtake.setPixelLatch(false);
                                 })
                                 .waitSeconds(1)
-                                .lineTo(new Vector2d(30, 12))
-                                .lineTo(new Vector2d(60, 12))
                                 .build()
                 );
 
