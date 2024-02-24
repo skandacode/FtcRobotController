@@ -188,6 +188,7 @@ public class RedFar2plus2 extends LinearOpMode
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
                 })
+                .back(7)
                 .splineTo(new Vector2d(-49, -49), -120)
                 //.splineTo(new Vector2d(-35.08, 52.85), Math.toRadians(120))
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
@@ -197,7 +198,7 @@ public class RedFar2plus2 extends LinearOpMode
                 })
                 .splineTo(new Vector2d(43, -43), Math.toRadians(0.00))
                 .setReversed(false)
-                .lineTo(new Vector2d(46, -27))
+                .lineTo(new Vector2d(46.5, -29))
                 .waitSeconds(0.5)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -230,7 +231,7 @@ public class RedFar2plus2 extends LinearOpMode
                 })
                 .setReversed(true)
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
-                .splineTo(new Vector2d(45, -39), Math.toRadians(0.00))
+                .splineTo(new Vector2d(44, -39), Math.toRadians(0.00))
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
                 })

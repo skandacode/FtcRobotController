@@ -62,7 +62,7 @@ public class Hang {
     }
     public void keepDrone(){
         //set position
-        drone.setPosition(0);
+        drone.setPosition(0.2);
     }
     public void releaseDrone(){
         //set position
