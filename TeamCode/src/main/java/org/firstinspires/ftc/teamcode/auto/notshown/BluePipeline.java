@@ -14,13 +14,13 @@ public class BluePipeline extends OpenCvPipeline
     Telemetry telemetry;
 
     static final Rect LEFT_ROI = new Rect(
-            new Point(0, 60),
+            new Point(0, 100),
             new Point(90, 150));
     static final Rect MID_ROI = new Rect(
-            new Point(110, 50),
+            new Point(110, 90),
             new Point(200, 140));
     static final Rect RIGHT_ROI = new Rect(
-            new Point(230, 60),
+            new Point(230, 100),
             new Point(320, 150));
     public String ObjectDirection;
     Mat mat = new Mat();

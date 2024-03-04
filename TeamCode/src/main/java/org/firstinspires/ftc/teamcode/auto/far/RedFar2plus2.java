@@ -92,8 +92,8 @@ public class RedFar2plus2 extends LinearOpMode
                     intake.intakePosition(0);
                 })
                 ////////////////////////////////////////////////////////////////////////////////////
-                .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
-                .splineTo(new Vector2d(-56, -44), Math.toRadians(150))
+                .splineTo(new Vector2d(-9, -60), Math.toRadians(180))
+                .splineTo(new Vector2d(-58, -43), Math.toRadians(150))
                 //.splineTo(new Vector2d(-49, 49), Math.toRadians(216))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
@@ -139,7 +139,7 @@ public class RedFar2plus2 extends LinearOpMode
                 })
                 .splineTo(new Vector2d(43, -43), Math.toRadians(0.00))
                 .setReversed(false)
-                .lineTo(new Vector2d(46, -36))
+                .lineTo(new Vector2d(47, -36))
                 .waitSeconds(0.5)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -150,7 +150,7 @@ public class RedFar2plus2 extends LinearOpMode
                     intake.intakePosition(0);
                 })
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
-                .splineTo(new Vector2d(-56, -41), Math.toRadians(150))
+                .splineTo(new Vector2d(-58, -43), Math.toRadians(150))
                 //.splineTo(new Vector2d(-49, 49), Math.toRadians(216))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
@@ -172,7 +172,7 @@ public class RedFar2plus2 extends LinearOpMode
                 })
                 .setReversed(true)
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
-                .splineTo(new Vector2d(45, -39), Math.toRadians(0.00))
+                .splineTo(new Vector2d(46, -39), Math.toRadians(0.00))
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
                 })
@@ -209,7 +209,7 @@ public class RedFar2plus2 extends LinearOpMode
                     intake.intakePosition(0);
                 })
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
-                .splineTo(new Vector2d(-56, -41), Math.toRadians(150))
+                .splineTo(new Vector2d(-57, -44), Math.toRadians(150))
                 //.splineTo(new Vector2d(-49, 49), Math.toRadians(216))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);

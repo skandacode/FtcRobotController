@@ -91,7 +91,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition4th(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-25, 8), Math.toRadians(190))//first pickup
+                .splineTo(new Vector2d(-23, 12), Math.toRadians(190))//first pickup
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -127,7 +127,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-25, 8), Math.toRadians(190))//second pickup
+                .splineTo(new Vector2d(-23, 9), Math.toRadians(190))//second pickup
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -167,7 +167,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48.5, 37), Math.toRadians(2.00))
+                .splineTo(new Vector2d(47.5, 37), Math.toRadians(2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -181,7 +181,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition4th(900);
                     intake.setPower(1);
                 })
-                .lineToSplineHeading(new Pose2d(-27, 12, Math.toRadians(180)))
+                .lineToSplineHeading(new Pose2d(-25, 12, Math.toRadians(180)))//first pickup
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -194,7 +194,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(200, 0);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -216,7 +216,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-30, 13), Math.toRadians(177))
+                .splineTo(new Vector2d(-28, 13), Math.toRadians(177))//pickup 2nd
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -229,7 +229,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(200, 0);
                     outtake.setPixelLatch(true);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3, ()->{
@@ -256,7 +256,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(47.5, 30), Math.toRadians(2.00))
+                .splineTo(new Vector2d(47, 29), Math.toRadians(2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -270,7 +270,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition4th(900);
                     intake.setPower(1);
                 })
-                .lineToSplineHeading(new Pose2d(-27, 12, Math.toRadians(180)))
+                .lineToSplineHeading(new Pose2d(-24, 13, Math.toRadians(180)))//first pickup
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -288,7 +288,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(30.00))
+                .splineToConstantHeading(new Vector2d(41.5, 35), Math.toRadians(30.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     outtake.depositPosition(300, 0);
@@ -300,12 +300,12 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .splineTo(new Vector2d(12, 12), Math.toRadians(180))
+                .splineTo(new Vector2d(12, 12), Math.toRadians(182))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-29, 12), Math.toRadians(182))
+                .splineToConstantHeading(new Vector2d(-27, 13), Math.toRadians(182))//second pickup
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -326,7 +326,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, 12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(42, 35), Math.toRadians(30.00))
+                .splineToConstantHeading(new Vector2d(41.5, 35), Math.toRadians(30.00))
                 .UNSTABLE_addTemporalMarkerOffset(0.1, ()->{
                     outtake.setPixelLatch(false);
                 })

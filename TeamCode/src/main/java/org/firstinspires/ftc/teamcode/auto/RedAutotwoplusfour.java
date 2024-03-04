@@ -164,7 +164,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     outtake.depositPosition(0, 0);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48, -37), Math.toRadians(-2.00))
+                .splineTo(new Vector2d(48.5, -37), Math.toRadians(-2.00))
                 .setReversed(false)
                 .waitSeconds(0.1)
                 .addTemporalMarker(()->{
@@ -179,7 +179,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.intakePosition4th(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-27.5, -13), Math.toRadians(181))//first pickup
+                .splineTo(new Vector2d(-24.5, -13), Math.toRadians(181))//first pickup
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -197,7 +197,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                 })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(44, -35), Math.toRadians(-30.00))
+                .splineToConstantHeading(new Vector2d(43, -35), Math.toRadians(-30.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     outtake.depositPosition(300, 0);
@@ -214,7 +214,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-30.5, -14), Math.toRadians(190))//second pickup
+                .splineTo(new Vector2d(-27.5, -14), Math.toRadians(190))//second pickup
                 .waitSeconds(1)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -235,7 +235,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                 })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(44, -35), Math.toRadians(-30.00))
+                .splineToConstantHeading(new Vector2d(43, -35), Math.toRadians(-30.00))
                 .UNSTABLE_addTemporalMarkerOffset(0.1, ()->{
                     outtake.setPixelLatch(false);
                 })
@@ -266,7 +266,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.intakePosition4th(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-26.5, -10), Math.toRadians(177))//first pickup
+                .splineTo(new Vector2d(-23.5, -12), Math.toRadians(180))//first pickup
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -284,7 +284,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                 })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(43.5, -35), Math.toRadians(-75.00))
+                .splineToConstantHeading(new Vector2d(44.5, -35), Math.toRadians(-75.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     outtake.depositPosition(300, 0);
@@ -302,7 +302,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .splineTo(new Vector2d(-26.5, -10), Math.toRadians(177))//second pickup
+                .splineTo(new Vector2d(-23.5, -12), Math.toRadians(180))//second pickup
                 .waitSeconds(0.5)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
                     intake.transferPosition();
@@ -323,7 +323,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                 })
                 .setReversed(true)
                 .lineToSplineHeading(new Pose2d(12, -12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(43.5, -35), Math.toRadians(-75.00))
+                .splineToConstantHeading(new Vector2d(44.5, -35), Math.toRadians(-75.00))
                 .UNSTABLE_addTemporalMarkerOffset(0.1, ()->{
                     outtake.setPixelLatch(false);
                 })

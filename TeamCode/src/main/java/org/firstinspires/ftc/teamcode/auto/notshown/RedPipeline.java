@@ -14,13 +14,13 @@ public class RedPipeline extends OpenCvPipeline
     Telemetry telemetry;
 
     static final Rect LEFT_ROI = new Rect(
-            new Point(0, 60),
+            new Point(0, 100),
             new Point(90, 150));
     static final Rect MID_ROI = new Rect(
-            new Point(110, 50),
+            new Point(110, 90),
             new Point(200, 140));
     static final Rect RIGHT_ROI = new Rect(
-            new Point(230, 60),
+            new Point(230, 100),
             new Point(320, 150));
     public String ObjectDirection;
     Mat mat = new Mat();
@@ -37,7 +37,7 @@ public class RedPipeline extends OpenCvPipeline
         Imgproc.cvtColor(input, mat, Imgproc.COLOR_RGB2HSV); //Uses HSV Colors
 
         Scalar lowHSVRed = new Scalar(0,100,20); // lower bound HSV for red 0 100 20
-        Scalar highHSVRed = new Scalar(15, 255, 255); // higher bound HSV for red 10 255 255
+        Scalar highHSVRed = new Scalar(13, 255, 255); // higher bound HSV for red 10 255 255
 
 //        Scalar lowHSVBlue = new Scalar(85, 123, 0); // lower bound HSV for blue 110 100 20
 //        Scalar highHSVBlue = new Scalar(177, 255, 255); // higher bound HSV for blue 130 255 255

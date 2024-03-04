@@ -200,6 +200,6 @@ public class BlueAutotwopluszero extends LinearOpMode
             intake.update();
             outtake.update();
         }
-
+        drive.followTrajectorySequence(park_left);
     }
 }
