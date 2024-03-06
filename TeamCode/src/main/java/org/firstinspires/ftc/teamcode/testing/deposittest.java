@@ -14,7 +14,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class deposittest extends LinearOpMode {
     Motor outtake1, outtake2;
-    Servo miniTurret, depositFlip, depositExtendo, pixellatch;
+    Servo depositFlip, depositExtendo, pixellatch;
     AnalogInput turretEncoder, flipEncoder;
     MotorGroup outtakeMotors;
     public static double motorPowers=0;
@@ -34,7 +34,6 @@ public class deposittest extends LinearOpMode {
         outtake2.resetEncoder();
         outtakeMotors=new MotorGroup(outtake1, outtake2);
         outtake1.encoder.setDirection(Motor.Direction.REVERSE);
-        miniTurret=hardwareMap.servo.get("miniturret2");
         depositFlip=hardwareMap.servo.get("depositflip4");
         depositExtendo=hardwareMap.servo.get("depositextendo3");
         pixellatch=hardwareMap.servo.get("depositlatch5");
@@ -46,7 +45,6 @@ public class deposittest extends LinearOpMode {
 
         while (opModeIsActive()){
             outtakeMotors.set(motorPowers);
-            miniTurret.setPosition(0.475+turretPos);
             depositFlip.setPosition(flipPos);
             depositExtendo.setPosition(extendoPos);
             pixellatch.setPosition(latchPos);
