@@ -28,6 +28,7 @@ public class Intake {
     public static double positionTolerance=10;
 
     public static int startPosition=0;
+    public int height=1;
 
     public void init(HardwareMap hardwareMap){
         intakemotor=new Motor(hardwareMap, "intake0", Motor.GoBILDA.RPM_1150);
@@ -97,6 +98,7 @@ public class Intake {
         this.setTarget(extend);
         //set servos
         this.setServos(0.82, 0.5);
+        height=1;
     }
     public void intakePosition(){
         this.intakePosition((int) this.getTarget());
@@ -112,6 +114,7 @@ public class Intake {
         this.setTarget(extend);
         //set servos
         this.setServos(0.73, 0.5);
+        height=5;
     }
     public void intakePosition5th(){
         this.intakePosition5th((int) this.getTarget());
@@ -120,6 +123,7 @@ public class Intake {
         this.setTarget(extend);
         //set servos
         this.setServos(0.75, 0.5);
+        height=4;
     }
     public void intakePosition4th(){
         this.intakePosition4th((int) this.getTarget());
@@ -128,6 +132,7 @@ public class Intake {
         this.setTarget(extend);
         //set servos
         this.setServos(0.78, 0.5);
+        height=3;
     }
     public void intakePosition3rd(){
         this.intakePosition3rd((int) this.getTarget());
@@ -136,6 +141,7 @@ public class Intake {
         this.setTarget(extend);
         //set servos
         this.setServos(0.785, 0.5);
+        height=2;
     }
     public void intakePosition2nd(){
         this.intakePosition2nd((int) this.getTarget());
