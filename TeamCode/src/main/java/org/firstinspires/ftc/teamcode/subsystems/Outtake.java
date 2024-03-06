@@ -76,7 +76,7 @@ public class Outtake {
 
         if (flipped){
             //set postion
-            depositFlip.setPosition(0.7);
+            depositFlip.setPosition(0.72);
         }else{
             //set position
             depositFlip.setPosition(0.18);

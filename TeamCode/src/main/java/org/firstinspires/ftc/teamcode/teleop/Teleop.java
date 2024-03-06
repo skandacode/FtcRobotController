@@ -53,8 +53,8 @@ public class Teleop extends LinearOpMode {
                 .transition(()->intake.canEject())
 
                 .state(TransferStates.REVERSEINTAKE)
-                .onEnter(()-> intake.setPower(-0.2))
-                .transitionTimed(1)
+                .onEnter(()-> intake.setPower(-1))
+                .transitionTimed(0.8)
 
                 .state(TransferStates.PUTDOWN)
                 .onEnter(()->{
