@@ -13,7 +13,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Config
 public class Outtake {
     Motor outtake1, outtake2;
-    Servo miniTurret, depositFlip, depositExtendo, pixelLatch;
+    Servo depositFlip, depositExtendo, pixelLatch;
     AnalogInput turretEncoder, flipEncoder;
     MotorGroup outtakeMotors;
     boolean scoring=false;
@@ -32,7 +32,6 @@ public class Outtake {
         outtakeMotors=new MotorGroup(outtake1, outtake2);
         outtake1.encoder.setDirection(Motor.Direction.REVERSE);
 
-        miniTurret=hardwareMap.servo.get("miniturret2");
         depositFlip=hardwareMap.servo.get("depositflip4");
         depositExtendo=hardwareMap.servo.get("depositextendo3");
         pixelLatch=hardwareMap.servo.get("depositlatch5");
@@ -71,8 +70,7 @@ public class Outtake {
 
         return degrees;
     }
-    public void setServos(double turret, boolean flipped, boolean extended){
-        miniTurret.setPosition(0.475+turret);
+    public void setServos(boolean flipped, boolean extended){
 
         if (flipped){
             //set postion
@@ -103,7 +101,7 @@ public class Outtake {
         this.scoring=true;
         this.setTarget(height);
         //set servos
-        this.setServos(angle, true, true);
+        this.setServos(true, true);
     }
     public void resetEncoder(){
         outtake1.resetEncoder();
@@ -112,14 +110,9 @@ public class Outtake {
         this.scoring=false;
         this.setTarget(0);
         //set servos
-        this.setServos(0, false, false);
+        this.setServos(false, false);
     }
     public boolean getScoring(){
         return this.scoring;
-    }
-    public void purpleHold(){
-        this.setServos(0, false, false);
-        depositExtendo.setPosition(0.98);
-        this.setTarget(0);
     }
 }

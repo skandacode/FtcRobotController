@@ -25,7 +25,7 @@ public class DepositTestActuallyUsingDepositClass extends LinearOpMode {
         waitForStart();
         while (opModeIsActive()){
             outtake.setTarget(depositTarget);
-            outtake.setServos(turretAngle, flipped, extended);
+            outtake.setServos(flipped, extended);
             outtake.setPixelLatch(opened);
             telemetry.addData("Deposit motor Position", outtake.getEncoderPos());
             telemetry.addData("TurretAngle", outtake.readAxonAnalog()[0]);

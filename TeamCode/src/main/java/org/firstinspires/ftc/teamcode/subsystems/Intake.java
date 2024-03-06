@@ -98,30 +98,47 @@ public class Intake {
         //set servos
         this.setServos(0.82, 0.5);
     }
+    public void intakePosition(){
+        this.intakePosition((int) this.getTarget());
+    }
     public void purplePosition(int extend){
         this.setTarget(extend);
         this.setServos(0.73, 0.25);
     }
-
+    public void purplePosition(){
+        this.purplePosition((int) this.getTarget());
+    }
     public void intakePosition5th(int extend){
         this.setTarget(extend);
         //set servos
         this.setServos(0.73, 0.5);
+    }
+    public void intakePosition5th(){
+        this.intakePosition5th((int) this.getTarget());
     }
     public void intakePosition4th(int extend){
         this.setTarget(extend);
         //set servos
         this.setServos(0.75, 0.5);
     }
+    public void intakePosition4th(){
+        this.intakePosition4th((int) this.getTarget());
+    }
     public void intakePosition3rd(int extend){
         this.setTarget(extend);
         //set servos
         this.setServos(0.78, 0.5);
     }
+    public void intakePosition3rd(){
+        this.intakePosition3rd((int) this.getTarget());
+    }
     public void intakePosition2nd(int extend){
         this.setTarget(extend);
         //set servos
         this.setServos(0.785, 0.5);
+    }
+    public void intakePosition2nd(){
+        this.intakePosition2nd((int) this.getTarget());
     }
     public void transferPosition(){
         this.setTarget(0);
