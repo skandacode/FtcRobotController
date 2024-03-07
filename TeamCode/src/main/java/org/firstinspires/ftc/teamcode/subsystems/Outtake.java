@@ -77,7 +77,7 @@ public class Outtake {
             depositFlip.setPosition(0.72);
         }else{
             //set position
-            depositFlip.setPosition(0.18);
+            depositFlip.setPosition(0.16);
         }
 
         if (extended){

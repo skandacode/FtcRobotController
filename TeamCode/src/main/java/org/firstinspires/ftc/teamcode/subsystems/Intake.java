@@ -92,12 +92,12 @@ public class Intake {
     }
     public void stay(int extend){
         this.setTarget(extend);
-        this.setServos(0.6, 0.5);
+        this.setServos(0.6, 0.54);
     }
     public void intakePosition(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.82, 0.5);
+        this.setServos(0.8, 0.54);
         height=1;
     }
     public void intakePosition(){
@@ -113,7 +113,7 @@ public class Intake {
     public void intakePosition5th(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.73, 0.5);
+        this.setServos(0.73, 0.54);
         height=5;
     }
     public void intakePosition5th(){
@@ -122,7 +122,7 @@ public class Intake {
     public void intakePosition4th(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.75, 0.5);
+        this.setServos(0.75, 0.54);
         height=4;
     }
     public void intakePosition4th(){
@@ -131,7 +131,7 @@ public class Intake {
     public void intakePosition3rd(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.78, 0.5);
+        this.setServos(0.78, 0.54);
         height=3;
     }
     public void intakePosition3rd(){
@@ -140,7 +140,7 @@ public class Intake {
     public void intakePosition2nd(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.785, 0.5);
+        this.setServos(0.785, 0.54);
         height=2;
     }
     public void intakePosition2nd(){
@@ -149,7 +149,7 @@ public class Intake {
     public void transferPosition(){
         this.setTarget(0);
         //set servos
-        setServos(0.23, 0.16);
+        setServos(0.23, 0.2);
 
     }
     public void setPower(double power){

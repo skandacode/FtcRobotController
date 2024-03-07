@@ -115,32 +115,10 @@ public class Teleop extends LinearOpMode {
                 outtake.setPixelLatch(true);
             }
             if (gamepad2.dpad_left){//increase height
-                if (intake.height==1){//ground
-                    intake.intakePosition2nd();
-                }
-                if (intake.height==2){//grabbing only second pixel
-                    intake.intakePosition3rd();
-                }
-                if (intake.height==3){
-                    intake.intakePosition4th();
-                }
-                if (intake.height==4){//ground
-                    intake.intakePosition5th();
-                }
+                intake.intakePosition3rd();
             }
             if (gamepad2.dpad_right){
-                if (intake.height==2){
-                    intake.intakePosition();
-                }
-                if (intake.height==3){
-                    intake.intakePosition2nd();
-                }
-                if (intake.height==4){
-                    intake.intakePosition3rd();
-                }
-                if (intake.height==5){//ground
-                    intake.intakePosition4th();
-                }
+                intake.intakePosition5th();
             }
 
             if (gamepad2.touchpad){//retract
