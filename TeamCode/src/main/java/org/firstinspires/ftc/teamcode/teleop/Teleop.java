@@ -115,10 +115,10 @@ public class Teleop extends LinearOpMode {
                 outtake.setPixelLatch(true);
             }
             if (gamepad2.dpad_left){//increase height
-                intake.intakePosition3rd();
+                intake.intakePosition2nd();
             }
             if (gamepad2.dpad_right){
-                intake.intakePosition5th();
+                intake.intakePosition4th();
             }
 
             if (gamepad2.touchpad){//retract
@@ -144,7 +144,7 @@ public class Teleop extends LinearOpMode {
                 hang.retract();
             } else if (gamepad1.left_trigger>0.5){
                 hang.raise();
-            }else if (gamepad2.left_stick_button && gamepad2.right_stick_button){
+            }else if (gamepad1.left_stick_button && gamepad1.right_stick_button){
                 hang.hang();
             }else{
                 hang.release();

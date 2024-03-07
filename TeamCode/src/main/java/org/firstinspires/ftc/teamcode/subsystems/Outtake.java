@@ -105,6 +105,7 @@ public class Outtake {
     }
     public void resetEncoder(){
         outtake1.resetEncoder();
+        startPosition=outtake1.getCurrentPosition();
     }
     public void transferPosition(){
         this.scoring=false;
