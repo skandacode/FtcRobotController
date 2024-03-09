@@ -11,6 +11,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.PwmControl;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.ServoImplEx;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Intake {
     Servo pitchcontrol;
     CRServo intakeservo1, intakeservo2;
     AnalogInput intakeheightsEncoder, intakeflapsEncoder;
+    TouchSensor intakeEnd;
 
     public PIDFController intakeController=new PIDFController(0.003, 0, 0, 0);
     public static double kF=0.6;
@@ -36,6 +38,8 @@ public class Intake {
         pitchcontrol=hardwareMap.servo.get("intakepitch1");
         intakeservo1=hardwareMap.crservo.get("intakeservo0");
         intakeservo2=hardwareMap.crservo.get("intakeservo1");
+        intakeEnd=hardwareMap.touchSensor.get("slideend");
+
 
         intakeheights.setPwmRange(new PwmControl.PwmRange(510, 2490));
 
@@ -70,7 +74,7 @@ public class Intake {
             }
             intakemotor.set(targetPower);
         }else{
-            if (intakemotor.encoder.getPosition()<5){
+            if (intakeEnd.isPressed()){
                 intakemotor.set(0);
             }else{
                 intakemotor.set(-1);

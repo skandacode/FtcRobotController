@@ -54,9 +54,9 @@ public class Outtake {
             outtakeMotors.set(targetPower+kf);
         }else{
             if (this.getEncoderPos()<positionTolerance){
-                outtakeMotors.set(0+kf);
+                outtakeMotors.set(0);
             }else{
-                outtakeMotors.set(-1+kf);
+                outtakeMotors.set(-1);
             }
         }
     }
