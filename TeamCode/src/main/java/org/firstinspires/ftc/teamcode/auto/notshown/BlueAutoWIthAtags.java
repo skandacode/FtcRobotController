@@ -33,7 +33,6 @@ import java.util.Objects;
 
 @Config
 @Autonomous
-@Disabled
 public class BlueAutoWIthAtags extends LinearOpMode
 {
     OpenCvWebcam webcam;
@@ -322,7 +321,7 @@ public class BlueAutoWIthAtags extends LinearOpMode
                     continue;
                 }
                 Translation2d aprilPose=new Translation2d(0, 72);
-                Translation2d toApril=new Translation2d(detection.ftcPose.x+8.5, detection.ftcPose.y).rotateBy(new Rotation2d(-Math.toRadians(detection.ftcPose.yaw)));
+                Translation2d toApril=new Translation2d(detection.ftcPose.x, detection.ftcPose.y+8.5).rotateBy(new Rotation2d(-Math.toRadians(detection.ftcPose.yaw)));
                 Translation2d robotTranslation=aprilPose.minus(toApril);
                 Rotation2d robotRotation=Rotation2d.fromDegrees((180)-detection.ftcPose.yaw);
                 com.arcrobotics.ftclib.geometry.Pose2d robotPosition=new com.arcrobotics.ftclib.geometry.Pose2d(robotTranslation.rotateBy(Rotation2d.fromDegrees(180)), robotRotation);
@@ -334,9 +333,7 @@ public class BlueAutoWIthAtags extends LinearOpMode
                 }
                 com.arcrobotics.ftclib.geometry.Pose2d position=new com.arcrobotics.ftclib.geometry.Pose2d(robotPosition.getY(), adding-robotPosition.getX(), robotPosition.getRotation());
 
-                Pose2d updatedPosition = new Pose2d(position.getX()*0.2+0.8*currPos.getX(),
-                        position.getY()*0.2+0.8*currPos.getY(),
-                        position.getHeading()*0.2+0.8*currPos.getHeading());
+                Pose2d updatedPosition = new Pose2d(position.getX(),position.getY(),position.getHeading());
 
                 packet.fieldOverlay().setFill("blue")
                         .strokeCircle(position.getX(), position.getY(), 9)

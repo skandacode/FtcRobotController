@@ -97,7 +97,7 @@ public class Intake {
     public void intakePosition(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.81, 0.55);
+        this.setServos(0.81, 0.53);
         height=1;
     }
     public void intakePosition(){

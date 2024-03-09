@@ -114,10 +114,10 @@ public class Teleop extends LinearOpMode {
                 outtake.depositPosition(currentheight, 0);
                 outtake.setPixelLatch(true);
             }
-            if (gamepad2.dpad_left){//increase height
+            if (gamepad2.left_stick_button){//increase height
                 intake.intakePosition2nd();
             }
-            if (gamepad2.dpad_right){
+            if (gamepad2.right_stick_button){
                 intake.intakePosition4th();
             }
 
