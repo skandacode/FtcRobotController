@@ -10,6 +10,7 @@ import com.sfdev.assembly.state.StateMachine;
 import com.sfdev.assembly.state.StateMachineBuilder;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.teamcode.auto.notshown.BluePipeline;
 import org.firstinspires.ftc.teamcode.auto.notshown.PropPosition;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
@@ -40,7 +41,9 @@ public class BlueAutoSensors extends LinearOpMode {
         toStackFromStage,
         toStagefromStack,
         toBackdropfromStage,
+        PARK
     }
+    enum possiblePark{MIDDLE, FAR}
 
     @Override
     public void runOpMode()
@@ -64,14 +67,46 @@ public class BlueAutoSensors extends LinearOpMode {
                 .build();
         TrajectorySequence toStagefromStackPath=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
                 .build();
-
+        TrajectorySequence toStackFromStage=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
+                .build();
+        TrajectorySequence toBackdropfromStage=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
+                .build();
+        TrajectorySequence toStackfromBackdrop=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
+                .build();
+        ElapsedTime timer=new ElapsedTime();
+        possiblePark parkPos=possiblePark.FAR;
 
         StateMachine autoMachineLeft=new StateMachineBuilder()
                 .state(movementStates.yellowAndToStack)
                 .onEnter(()->drive.followTrajectorySequenceAsync(yellowAndToStackPathLeft))
-                .transition(()->drive.isBusy())//gets to the stack
+                .transition(()->!drive.isBusy(), movementStates.toStagefromStack)//gets to the stack
+
                 .state(movementStates.toStagefromStack)
                 .onEnter(()->drive.followTrajectorySequenceAsync(toStagefromStackPath))
+                .transition(()->(!drive.isBusy() && right2m.getDistance(DistanceUnit.CM)<60), movementStates.toStackFromStage)//senses other robot
+                .transition(()->(!drive.isBusy() && !(right2m.getDistance(DistanceUnit.CM)<60)), movementStates.toBackdropfromStage)//does not see
+                .transition(()->timer.milliseconds()>20, movementStates.PARK)
+
+                .state(movementStates.toStackFromStage)
+                .onEnter(()->drive.followTrajectorySequenceAsync(toStackFromStage))
+                .transition(()->!drive.isBusy(), movementStates.toStagefromStack)
+
+                .state(movementStates.toBackdropfromStage)
+                .onEnter(()->drive.followTrajectorySequenceAsync(toBackdropfromStage))
+                .transition(()->!drive.isBusy(), movementStates.toStackFromBackdrop)
+
+                .state(movementStates.toStackFromBackdrop)
+                .onEnter(()->drive.followTrajectorySequenceAsync(toStackfromBackdrop))
+                .transition(()->!drive.isBusy(), movementStates.toStagefromStack)
+
+                .state(movementStates.PARK)
+                .onEnter(()->{
+                    if (parkPos==possiblePark.MIDDLE){
+
+                    }else{
+
+                    }
+                })
                 .build();
 
 
@@ -128,7 +163,7 @@ public class BlueAutoSensors extends LinearOpMode {
 
         waitForStart();
 
-        ElapsedTime timer=new ElapsedTime();
+        timer.reset();
         outtake.transferPosition();
         if (randomization==PropPosition.LEFT){
             intake.transferPosition();
