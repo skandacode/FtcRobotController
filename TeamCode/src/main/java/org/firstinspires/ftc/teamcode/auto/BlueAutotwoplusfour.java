@@ -6,6 +6,7 @@ import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
 import com.acmerobotics.roadrunner.profile.VelocityConstraint;
 import com.acmerobotics.roadrunner.trajectory.constraints.MecanumVelocityConstraint;
+import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -23,6 +24,7 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvWebcam;
 
+import java.util.List;
 import java.util.Objects;
 
 @Config
@@ -346,6 +348,8 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .back(20)
                 .build();
 
+        List<LynxModule> hubs = hardwareMap.getAll(LynxModule.class);
+        hubs.forEach(hub -> hub.setBulkCachingMode(LynxModule.BulkCachingMode.MANUAL));
 
         while (opModeInInit()){
             telemetry.addData("Frame Count", webcam.getFrameCount());
@@ -404,14 +408,10 @@ public class BlueAutotwoplusfour extends LinearOpMode
             drive.followTrajectorySequenceAsync(right);
         }
         while (drive.isBusy() && opModeIsActive()){
+            hubs.forEach(LynxModule::clearBulkCache);
             drive.update();
             intake.update();
             outtake.update();
-        }
-        timer.reset();
-        intake.setTarget(0);
-        while (timer.milliseconds()<200){
-            intake.update();
         }
     }
 }

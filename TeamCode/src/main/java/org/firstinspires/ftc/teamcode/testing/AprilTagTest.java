@@ -5,9 +5,12 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.geometry.Pose2d;
 import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.IMU;
+
 import java.util.List;
 
 import android.graphics.Canvas;
@@ -16,6 +19,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDir
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.robotcore.internal.camera.calibration.CameraCalibration;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.VisionProcessor;
@@ -41,23 +45,32 @@ public class AprilTagTest extends LinearOpMode {
     private VisionPortal visionPortal;
 
     public Pose2d position=new Pose2d(0, 0, Rotation2d.fromDegrees(0));
-
+    IMU imu;
     @Override
     public void runOpMode() throws InterruptedException{
 
         initAprilTag();
-
+        imu = hardwareMap.get(IMU.class, "imu");
+        imu.initialize(
+                new IMU.Parameters(
+                        new RevHubOrientationOnRobot(
+                                RevHubOrientationOnRobot.LogoFacingDirection.DOWN,
+                                RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
+                        )
+                )
+        );
+        imu.resetYaw();
         // Wait for the DS start button to be touched.
         telemetry.addData("DS preview on/off", "3 dots, Camera Stream");
         telemetry.addData(">", "Touch Play to start OpMode");
         telemetry.update();
         waitForStart();
-
         if (opModeIsActive()) {
             while (opModeIsActive()) {
+                YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
 
-                telemetryAprilTag();
-
+                telemetryAprilTag(orientation.getYaw(AngleUnit.DEGREES));
+                telemetry.addData("MOREIMU", orientation.getYaw(AngleUnit.DEGREES));
                 telemetry.update();
 
                 if (gamepad1.dpad_down) {
@@ -85,6 +98,9 @@ public class AprilTagTest extends LinearOpMode {
         VisionPortal.Builder builder = new VisionPortal.Builder();
 
         builder.setCamera(hardwareMap.get(WebcamName.class, "Webcam 1"));
+
+
+
         builder.addProcessor(new VisionProcessor() {
             @Override
             public void init(int width, int height, CameraCalibration calibration) {
@@ -110,7 +126,7 @@ public class AprilTagTest extends LinearOpMode {
     /**
      * Function to add telemetry about AprilTag detections.
      */
-    public void telemetryAprilTag() {
+    public void telemetryAprilTag(double heading) {
 
         List<AprilTagDetection> currentDetections = aprilTag.getDetections();
         telemetry.addData("# AprilTags Detected", currentDetections.size());
@@ -124,11 +140,15 @@ public class AprilTagTest extends LinearOpMode {
                     continue;
                 }
                 Translation2d aprilPose=new Translation2d(0, 72);
-                Translation2d toApril=new Translation2d(detection.ftcPose.x, detection.ftcPose.y+8.5).rotateBy(new Rotation2d(-Math.toRadians(detection.ftcPose.yaw)));
+                Translation2d toApril=new Translation2d(detection.ftcPose.x, detection.ftcPose.y+8.5).rotateBy(new Rotation2d(-Math.toRadians(-heading-90)));
                 Translation2d robotTranslation=aprilPose.minus(toApril);
-                Rotation2d robotRotation=Rotation2d.fromDegrees((180)-detection.ftcPose.yaw);
+                Rotation2d robotRotation=Rotation2d.fromDegrees(180-(-heading-90));
                 Pose2d robotPosition=new Pose2d(robotTranslation.rotateBy(Rotation2d.fromDegrees(180)), robotRotation);
                 telemetry.addLine(robotPosition.toString());
+                telemetry.addData("IMU", heading);
+                telemetry.addData("What we see", heading+90);
+                telemetry.addData("Tag", detection.ftcPose.yaw);
+
                 TelemetryPacket packet = new TelemetryPacket();
                 double adding=40.932;
                 if (detection.id==7){
