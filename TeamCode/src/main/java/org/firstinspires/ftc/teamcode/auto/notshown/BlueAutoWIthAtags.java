@@ -9,13 +9,10 @@ import com.arcrobotics.ftclib.geometry.Rotation2d;
 import com.arcrobotics.ftclib.geometry.Translation2d;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.auto.notshown.BluePipeline;
-import org.firstinspires.ftc.teamcode.auto.notshown.PropPosition;
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Outtake;
@@ -87,7 +84,7 @@ public class BlueAutoWIthAtags extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(48, 43), Math.toRadians(2.00))
@@ -108,7 +105,7 @@ public class BlueAutoWIthAtags extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(30, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(48, 37), Math.toRadians(2.00))
@@ -128,7 +125,7 @@ public class BlueAutoWIthAtags extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(48, 31), Math.toRadians(2.00))
@@ -161,7 +158,7 @@ public class BlueAutoWIthAtags extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3.5, ()->{
-                    outtake.depositPosition(300, -0.4);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(45.24, 25.17), Math.toRadians(220+180))

@@ -85,7 +85,7 @@ public class Outtake {
             depositExtendo.setPosition(0.3);
         }else{
             //set position
-            depositExtendo.setPosition(0.92);
+            depositExtendo.setPosition(0.9);
         }
     }
     public void setPixelLatch(boolean latchClosed){
@@ -97,7 +97,7 @@ public class Outtake {
             pixelLatch.setPosition(0.55);
         }
     }
-    public void depositPosition(int height, double angle){
+    public void depositPosition(int height){
         this.scoring=true;
         this.setTarget(height);
         //set servos

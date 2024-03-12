@@ -39,8 +39,8 @@ public class BluePipeline extends OpenCvPipeline
 //        Scalar lowHSVRed = new Scalar(0,140,111); // lower bound HSV for red 0 100 20
 //        Scalar highHSVRed = new Scalar(15, 255, 255); // higher bound HSV for red 10 255 255
 
-        Scalar lowHSVBlue = new Scalar(85, 123, 0); // lower bound HSV for blue 110 100 20
-        Scalar highHSVBlue = new Scalar(177, 255, 255); // higher bound HSV for blue 130 255 255
+        Scalar lowHSVBlue = new Scalar(80, 120, 0); // lower bound HSV for blue 110 100 20
+        Scalar highHSVBlue = new Scalar(190, 255, 255); // higher bound HSV for blue 130 255 255
 
         thresh.release();
 

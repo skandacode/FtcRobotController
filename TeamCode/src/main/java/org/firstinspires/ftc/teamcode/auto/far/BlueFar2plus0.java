@@ -78,7 +78,7 @@ public class BlueFar2plus0 extends LinearOpMode
                 .splineTo(new Vector2d(-35.08, 52.85), Math.toRadians(60))
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(46.8, 43), Math.toRadians(0.00))
@@ -101,7 +101,7 @@ public class BlueFar2plus0 extends LinearOpMode
                 .splineTo(new Vector2d(-35.08, 52.85), Math.toRadians(60))
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))
@@ -127,7 +127,7 @@ public class BlueFar2plus0 extends LinearOpMode
                 //.splineTo(new Vector2d(-35.08, 52.85), Math.toRadians(120))
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(43, 43), Math.toRadians(0.00))

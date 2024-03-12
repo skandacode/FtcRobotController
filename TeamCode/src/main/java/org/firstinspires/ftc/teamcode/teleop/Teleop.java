@@ -54,7 +54,7 @@ public class Teleop extends LinearOpMode {
 
                 .state(TransferStates.REVERSEINTAKE)
                 .onEnter(()-> intake.setPower(-1))
-                .transitionTimed(0.8)
+                .transitionTimed(1)
 
                 .state(TransferStates.PUTDOWN)
                 .onEnter(()->{
@@ -98,20 +98,20 @@ public class Teleop extends LinearOpMode {
                 if (currentheight<700) {
                     currentheight = currentheight + 100;
                 }
-                outtake.depositPosition(currentheight, 0);
+                outtake.depositPosition(currentheight);
             }
             if (currLeftTrigger && !prevLeftTrigger){
                 if (currentheight>0){
                     currentheight=currentheight-100;
                 }
-                outtake.depositPosition(currentheight, 0);
+                outtake.depositPosition(currentheight);
             }
             prevRightTrigger=currRightTrigger;
             prevLeftTrigger=currLeftTrigger;
 
 
             if (gamepad2.dpad_up){//score deposit
-                outtake.depositPosition(currentheight, 0);
+                outtake.depositPosition(currentheight);
                 outtake.setPixelLatch(true);
             }
             if (gamepad2.left_stick_button){//increase height

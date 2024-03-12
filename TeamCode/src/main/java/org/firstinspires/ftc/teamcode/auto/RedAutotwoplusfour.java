@@ -9,7 +9,6 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.teamcode.auto.notshown.BluePipeline;
 import org.firstinspires.ftc.teamcode.auto.notshown.PropPosition;
 import org.firstinspires.ftc.teamcode.auto.notshown.RedPipeline;
 import org.firstinspires.ftc.teamcode.drive.DriveConstants;
@@ -72,7 +71,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(48, -29), Math.toRadians(0.00))
@@ -102,7 +101,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -110,7 +109,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                 .splineToConstantHeading(new Vector2d(42.5, -35), Math.toRadians(-60.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                     outtake.setPixelLatch(false);
@@ -137,7 +136,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3, ()->{
@@ -161,7 +160,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.stay(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(30, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(48.5, -37), Math.toRadians(-2.00))
@@ -192,7 +191,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.stay(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -200,7 +199,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                 .splineToConstantHeading(new Vector2d(43, -35), Math.toRadians(-30.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                     outtake.setPixelLatch(false);
@@ -227,7 +226,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.stay(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3, ()->{
@@ -248,7 +247,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.stay(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(48.5, -44), Math.toRadians(0.00))
@@ -279,7 +278,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.stay(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -287,7 +286,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                 .splineToConstantHeading(new Vector2d(44.5, -35), Math.toRadians(-75.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.7, ()->{
                     outtake.setPixelLatch(false);
@@ -315,7 +314,7 @@ public class RedAutotwoplusfour extends LinearOpMode
                     intake.stay(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3, ()->{

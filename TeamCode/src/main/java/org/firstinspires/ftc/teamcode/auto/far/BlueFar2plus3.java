@@ -93,7 +93,7 @@ public class BlueFar2plus3 extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -126,7 +126,7 @@ public class BlueFar2plus3 extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(150, 0);
+                    outtake.depositPosition(150);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -172,7 +172,7 @@ public class BlueFar2plus3 extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -202,7 +202,7 @@ public class BlueFar2plus3 extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)

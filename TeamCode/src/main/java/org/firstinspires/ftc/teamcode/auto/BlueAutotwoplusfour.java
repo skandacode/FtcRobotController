@@ -4,8 +4,6 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
 import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.profile.VelocityConstraint;
-import com.acmerobotics.roadrunner.trajectory.constraints.MecanumVelocityConstraint;
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -75,7 +73,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.stay(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(48.5, 44), Math.toRadians(0.00))
@@ -99,14 +97,14 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.transferPosition();
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1.1, ()->{
-                    intake.setPower(-0.2);
+                    intake.setPower(-1);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2, ()->{
                     intake.setPower(0);
-                    intake.stay(60);
+                    intake.stay(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -114,7 +112,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .splineToConstantHeading(new Vector2d(43, 35), Math.toRadians(75.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                     outtake.setPixelLatch(false);
@@ -142,7 +140,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.stay(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3, ()->{
@@ -166,7 +164,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(30, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(47.5, 37), Math.toRadians(2.00))
@@ -196,7 +194,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(200, 0);
+                    outtake.depositPosition(200);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -204,7 +202,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .splineToConstantHeading(new Vector2d(43, 35), Math.toRadians(30.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                     outtake.setPixelLatch(false);
@@ -231,7 +229,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(200, 0);
+                    outtake.depositPosition(200);
                     outtake.setPixelLatch(true);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3, ()->{
@@ -255,7 +253,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
-                    outtake.depositPosition(0, 0);
+                    outtake.depositPosition(0);
                     outtake.setPixelLatch(true);
                 })
                 .splineTo(new Vector2d(47, 29), Math.toRadians(2.00))
@@ -285,7 +283,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -293,7 +291,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                 .splineToConstantHeading(new Vector2d(41.5, 35), Math.toRadians(30.00))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(1, ()->{
                     outtake.setPixelLatch(false);
@@ -320,7 +318,7 @@ public class BlueAutotwoplusfour extends LinearOpMode
                     intake.intakePosition5th(60);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(300, 0);
+                    outtake.depositPosition(300);
                     outtake.setPixelLatch(true);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(3, ()->{
