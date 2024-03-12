@@ -101,6 +101,14 @@ public class Intake {
         this.setServos(0.82, 0.52);
         height=1;
     }
+    public void intakePositionExtended(int extend){
+        this.setTarget(extend);
+        this.setServos(0.8, 0.52);
+        height=1;
+    }
+    public void intakePositionExtended(){
+        this.intakePositionExtended((int) this.getTarget());
+    }
     public void intakePosition(){
         this.intakePosition((int) this.getTarget());
     }
@@ -114,7 +122,7 @@ public class Intake {
     public void intakePosition5th(int extend){
         this.setTarget(extend);
         //set servos
-        this.setServos(0.725, 0.52);
+        this.setServos(0.72, 0.52);
         height=5;
     }
     public void intakePosition5th(){
@@ -151,7 +159,6 @@ public class Intake {
         this.setTarget(0);
         //set servos
         setServos(0.26, 0.2);
-
     }
     public void setPower(double power){
         intakeservo1.setPower(power);

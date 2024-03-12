@@ -166,15 +166,233 @@ public class BlueAutoSensors extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
                 .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(178))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
-                    intake.intakePosition(900);
+                    intake.intakePositionExtended(900);
                     intake.setPower(1);
                 })
                 .forward(42.5)
+                .waitSeconds(1)
+                .build();
+
+
+        //=============================================================================
+
+        TrajectorySequence yellowAndToStackPathMiddle=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(50, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(50))
+
+                .addTemporalMarker(()->{
+                    intake.stay(80);
+                })
+                .lineTo(new Vector2d(11.75, 36.32))
+                .setReversed(true)
+                .addTemporalMarker(()->{
+                    intake.stay(0);
+                })
+                .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
+                    outtake.depositPosition(0);
+                    outtake.setPixelLatch(true);
+                })
+                .back(4)
+                .lineToLinearHeading(new Pose2d(47.5, 36, Math.toRadians(180.00)))
+                .setReversed(false)
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
-                    intake.intakePosition();
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.5, ()->{
+                    outtake.transferPosition();
+                })
+                .waitSeconds(2)
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(177.5)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(177.5))
+                .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
+                    intake.intakePosition5th(900);
+                    intake.setPower(1);
+                })
+                .forward(42.5)//first pickup
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                    intake.intakePosition4th();
                 })
                 .waitSeconds(1)
                 .build();
+        TrajectorySequence toStagefromStackPathMiddle=drive.trajectorySequenceBuilder(yellowAndToStackPathMiddle.end())
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .addTemporalMarker(()->{
+                    intake.stay(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.2, ()->{
+                    intake.setPower(-1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.1, ()->{
+                    intake.setPower(0);
+                    intake.stay(0);
+                })
+                .lineTo(new Vector2d(43, 12))
+                .UNSTABLE_addTemporalMarkerOffset(-0.1, ()->{
+                    outtake.depositPosition(0);
+                    outtake.setPixelLatch(true);
+                })
+                .build();
+        TrajectorySequence toStackFromStageMiddle=drive.trajectorySequenceBuilder(toStagefromStackPathMiddle.end())
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                    outtake.transferPosition();
+                })
+                .waitSeconds(1)
+                .addTemporalMarker(()->{
+                    intake.intakePosition(900);
+                    intake.setPower(1);
+                })
+                .lineToLinearHeading(new Pose2d(-23, 8, Math.toRadians(181)))
+                .waitSeconds(1)
+                .build();
+        TrajectorySequence toBackdropfromStageMiddle=drive.trajectorySequenceBuilder(toStagefromStackPathMiddle.end())
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .lineTo(new Vector2d(43, 35))
+                .addTemporalMarker(()->{
+                    outtake.depositPosition(330);
+                })
+                .waitSeconds(1)
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .waitSeconds(1)
+                .build();
+        TrajectorySequence toStackfromBackdropMiddle=drive.trajectorySequenceBuilder(toBackdropfromStageMiddle.end())
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .addTemporalMarker(()->{
+                    outtake.transferPosition();
+                })
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(179))
+                .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
+                    intake.intakePositionExtended(900);
+                    intake.setPower(1);
+                })
+                .forward(42.5)
+                .waitSeconds(1)
+                .build();
+        //===========================================================================
+        TrajectorySequence yellowAndToStackPathRight=drive.trajectorySequenceBuilder(new Pose2d(11.83, 62.16, Math.toRadians(270.00)))
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(50, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(50))
+
+                .addTemporalMarker(()->{
+                    intake.transferPosition();
+                    intake.setTarget(80);
+                })
+                .splineTo(new Vector2d(8, 37), Math.toRadians(228.62))
+                .setReversed(true)
+                .addTemporalMarker(()->{
+                    intake.stay(0);
+                })
+                .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
+                    outtake.depositPosition(0);
+                    outtake.setPixelLatch(true);
+                })
+                .back(4)
+                .lineToLinearHeading(new Pose2d(47.5, 29, Math.toRadians(180.00)))
+                .setReversed(false)
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.5, ()->{
+                    outtake.transferPosition();
+                })
+                .waitSeconds(2)
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(177.5)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(177.5))
+                .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
+                    intake.intakePosition5th(900);
+                    intake.setPower(1);
+                })
+                .forward(42.5)//first pickup
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                    intake.intakePosition4th();
+                })
+                .waitSeconds(1)
+                .build();
+        TrajectorySequence toStagefromStackPathRight=drive.trajectorySequenceBuilder(yellowAndToStackPathRight.end())
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .addTemporalMarker(()->{
+                    intake.stay(0);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                    intake.transferPosition();
+                })
+                .UNSTABLE_addTemporalMarkerOffset(1.2, ()->{
+                    intake.setPower(-1);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(2.1, ()->{
+                    intake.setPower(0);
+                    intake.stay(0);
+                })
+                .lineTo(new Vector2d(43, 12))
+                .UNSTABLE_addTemporalMarkerOffset(-0.1, ()->{
+                    outtake.depositPosition(0);
+                    outtake.setPixelLatch(true);
+                })
+                .build();
+        TrajectorySequence toStackFromStageRight=drive.trajectorySequenceBuilder(toStagefromStackPathRight.end())
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
+                    outtake.transferPosition();
+                })
+                .waitSeconds(1)
+                .addTemporalMarker(()->{
+                    intake.intakePosition(900);
+                    intake.setPower(1);
+                })
+                .lineToLinearHeading(new Pose2d(-23, 8, Math.toRadians(181)))
+                .waitSeconds(1)
+                .build();
+        TrajectorySequence toBackdropfromStageRight=drive.trajectorySequenceBuilder(toStagefromStackPathRight.end())
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .lineTo(new Vector2d(43, 35))
+                .addTemporalMarker(()->{
+                    outtake.depositPosition(330);
+                })
+                .waitSeconds(1)
+                .addTemporalMarker(()->{
+                    outtake.setPixelLatch(false);
+                })
+                .waitSeconds(1)
+                .build();
+        TrajectorySequence toStackfromBackdropRight=drive.trajectorySequenceBuilder(toBackdropfromStageRight.end())
+                .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
+                .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
+                .addTemporalMarker(()->{
+                    outtake.transferPosition();
+                })
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(178))
+                .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
+                    intake.intakePositionExtended(900);
+                    intake.setPower(1);
+                })
+                .forward(42.5)
+                .waitSeconds(1)
+                .build();
+        //===========================================================================
         possiblePark parkPos=possiblePark.FAR;
         TrajectorySequence parkCorner=drive.trajectorySequenceBuilder(toBackdropfromStageLeft.end())
                 .addTemporalMarker(()->{
@@ -248,6 +466,7 @@ public class BlueAutoSensors extends LinearOpMode {
 
         outtake.transferPosition();
         intake.transferPosition();
+        int timesSeen=0;
         if (randomization==PropPosition.LEFT){
             drive.setPoseEstimate(yellowAndToStackPathLeft.start());
             drive.followTrajectorySequenceAsync(yellowAndToStackPathLeft);
@@ -257,6 +476,7 @@ public class BlueAutoSensors extends LinearOpMode {
             if (right2m.getDistance(DistanceUnit.CM)<60){//senses other robot
                 drive.followTrajectorySequenceAsync(toStackFromStageLeft);
                 while (drive.isBusy() && opModeIsActive()){updateSystems();}
+                timesSeen++;
             }else{
                 drive.followTrajectorySequenceAsync(toBackdropfromStageLeft);
                 while (drive.isBusy() && opModeIsActive()){updateSystems();}
@@ -273,17 +493,93 @@ public class BlueAutoSensors extends LinearOpMode {
             }else{
                 drive.followTrajectorySequenceAsync(toBackdropfromStageLeft);
                 while (drive.isBusy() && opModeIsActive()){updateSystems();}
-                if (parkPos==possiblePark.FAR){
-                    drive.followTrajectorySequenceAsync(parkCorner);
-                }else{
-                    drive.followTrajectorySequenceAsync(parkMiddle);
+                if (timesSeen==1) {
+                    if (parkPos == possiblePark.FAR) {
+                        drive.followTrajectorySequenceAsync(parkCorner);
+                    } else {
+                        drive.followTrajectorySequenceAsync(parkMiddle);
+                    }
+                    while (drive.isBusy() && opModeIsActive()) {
+                        updateSystems();
+                    }
                 }
-                while (drive.isBusy() && opModeIsActive()){updateSystems();}
             }
         }
         if (randomization==PropPosition.MIDDLE){
+            drive.setPoseEstimate(yellowAndToStackPathMiddle.start());
+            drive.followTrajectorySequenceAsync(yellowAndToStackPathMiddle);
+            while (drive.isBusy() && opModeIsActive()){updateSystems();}
+            drive.followTrajectorySequenceAsync(toStagefromStackPathMiddle);
+            while (drive.isBusy() && opModeIsActive()){updateSystems();}
+            if (right2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+                drive.followTrajectorySequenceAsync(toStackFromStageMiddle);
+                while (drive.isBusy() && opModeIsActive()){updateSystems();}
+                timesSeen++;
+            }else{
+                drive.followTrajectorySequenceAsync(toBackdropfromStageMiddle);
+                while (drive.isBusy() && opModeIsActive()){updateSystems();}
+                drive.followTrajectorySequenceAsync(toStackfromBackdropMiddle);
+                while (drive.isBusy() && opModeIsActive()){updateSystems();}
+            }
+            drive.followTrajectorySequenceAsync(toStagefromStackPathMiddle);
+            while (drive.isBusy() && opModeIsActive()){updateSystems();}
+            if (right2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+                outtake.setPixelLatch(false);
+                sleep(500);
+                outtake.transferPosition();
+                sleep(500);
+            }else{
+                drive.followTrajectorySequenceAsync(toBackdropfromStageMiddle);
+                while (drive.isBusy() && opModeIsActive()){updateSystems();}
+                if (timesSeen==1) {
+                    if (parkPos == possiblePark.FAR) {
+                        drive.followTrajectorySequenceAsync(parkCorner);
+                    } else {
+                        drive.followTrajectorySequenceAsync(parkMiddle);
+                    }
+                    while (drive.isBusy() && opModeIsActive()) {
+                        updateSystems();
+                    }
+                }
+            }
         }
         if (randomization==PropPosition.RIGHT){
+            drive.setPoseEstimate(yellowAndToStackPathRight.start());
+            drive.followTrajectorySequenceAsync(yellowAndToStackPathRight);
+            while (drive.isBusy() && opModeIsActive()){updateSystems();}
+            drive.followTrajectorySequenceAsync(toStagefromStackPathRight);
+            while (drive.isBusy() && opModeIsActive()){updateSystems();}
+            if (right2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+                drive.followTrajectorySequenceAsync(toStackFromStageRight);
+                while (drive.isBusy() && opModeIsActive()){updateSystems();}
+                timesSeen++;
+            }else{
+                drive.followTrajectorySequenceAsync(toBackdropfromStageRight);
+                while (drive.isBusy() && opModeIsActive()){updateSystems();}
+                drive.followTrajectorySequenceAsync(toStackfromBackdropRight);
+                while (drive.isBusy() && opModeIsActive()){updateSystems();}
+            }
+            drive.followTrajectorySequenceAsync(toStagefromStackPathRight);
+            while (drive.isBusy() && opModeIsActive()){updateSystems();}
+            if (right2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+                outtake.setPixelLatch(false);
+                sleep(500);
+                outtake.transferPosition();
+                sleep(500);
+            }else{
+                drive.followTrajectorySequenceAsync(toBackdropfromStageRight);
+                while (drive.isBusy() && opModeIsActive()){updateSystems();}
+                if (timesSeen==1) {
+                    if (parkPos == possiblePark.FAR) {
+                        drive.followTrajectorySequenceAsync(parkCorner);
+                    } else {
+                        drive.followTrajectorySequenceAsync(parkMiddle);
+                    }
+                    while (drive.isBusy() && opModeIsActive()) {
+                        updateSystems();
+                    }
+                }
+            }
         }
     }
     public void updateSystems(){
