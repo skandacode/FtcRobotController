@@ -36,14 +36,6 @@ public class BlueAutoSensors extends LinearOpMode {
     public static String ObjectDirection;
     SampleMecanumDrive drive;
     Rev2mDistanceSensor left2m, right2m;
-    enum movementStates{
-        yellowAndToStack,
-        toStackFromBackdrop,
-        toStackFromStage,
-        toStagefromStack,
-        toBackdropfromStage,
-        PARK
-    }
     enum possiblePark{MIDDLE, FAR}
     double loopTime=0;
     List<LynxModule> hubs;

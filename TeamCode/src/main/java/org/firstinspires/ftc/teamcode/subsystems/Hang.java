@@ -56,9 +56,12 @@ public class Hang {
         hangMotor.set(1);
     }
     public void release(){
+        this.releaseServos();
+        hangMotor.set(0);
+    }
+    public void releaseServos(){
         hang1.setPwmDisable();
         hang2.setPwmDisable();
-        hangMotor.set(0);
     }
     public void keepDrone(){
         //set position
