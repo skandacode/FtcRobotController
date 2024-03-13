@@ -63,6 +63,13 @@ public class Teleop extends LinearOpMode {
                 })
                 .transitionTimed(0.5, TransferStates.IDLE)
                 .build();
+        outtake.setVelocity(-0.3);
+        sleep(500);
+        while (outtake.getVelocity()<0 && !isStopRequested()){
+            outtake.setVelocity(-0.3);
+        }
+        outtake.setVelocity(0);
+        outtake.resetEncoder();
         waitForStart();
         int currentheight=0;
         boolean prevLeftTrigger=false;

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystems;
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.controller.PIDFController;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
+import com.arcrobotics.ftclib.hardware.motors.MotorEx;
 import com.arcrobotics.ftclib.hardware.motors.MotorGroup;
 import com.qualcomm.robotcore.hardware.AnalogInput;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -12,7 +13,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @Config
 public class Outtake {
-    Motor outtake1, outtake2;
+    MotorEx outtake1, outtake2;
     Servo depositFlip, depositExtendo, pixelLatch;
     AnalogInput turretEncoder, flipEncoder;
     MotorGroup outtakeMotors;
@@ -24,8 +25,8 @@ public class Outtake {
     public static int startPosition=0;
 
     public void init(HardwareMap hardwareMap){
-        outtake1=new Motor(hardwareMap, "depositfirst1", Motor.GoBILDA.RPM_1150);
-        outtake2=new Motor(hardwareMap, "depositsecond2", Motor.GoBILDA.RPM_1150);
+        outtake1=new MotorEx(hardwareMap, "depositfirst1", Motor.GoBILDA.RPM_1150);
+        outtake2=new MotorEx(hardwareMap, "depositsecond2", Motor.GoBILDA.RPM_1150);
         outtake1.setInverted(true);
         outtake1.resetEncoder();
         outtake2.resetEncoder();
@@ -115,5 +116,11 @@ public class Outtake {
     }
     public boolean getScoring(){
         return this.scoring;
+    }
+    public double getVelocity(){
+        return outtake1.getVelocity();
+    }
+    public void setVelocity(double v){
+        outtakeMotors.set(v);
     }
 }
