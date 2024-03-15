@@ -294,7 +294,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(47, 29, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(46.5, 29, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -353,13 +353,13 @@ public class BlueAutoSensors extends LinearOpMode {
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
                 })
-                .lineToLinearHeading(new Pose2d(-23, 8, Math.toRadians(181)))
+                .lineToLinearHeading(new Pose2d(-24, 8, Math.toRadians(181)))
                 .waitSeconds(1)
                 .build();
         TrajectorySequence toBackdropfromStageRight=drive.trajectorySequenceBuilder(toStagefromStackPathRight.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(42.5, 35))
+                .lineTo(new Vector2d(42, 35))
                 .addTemporalMarker(()->{
                     outtake.depositPosition(330);
                 })
@@ -385,7 +385,7 @@ public class BlueAutoSensors extends LinearOpMode {
                 .waitSeconds(1)
                 .build();
         //===========================================================================
-        possiblePark parkPos=possiblePark.FAR;
+        possiblePark parkPos=possiblePark.MIDDLE;
         TrajectorySequence parkCorner=drive.trajectorySequenceBuilder(toBackdropfromStageLeft.end())
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
