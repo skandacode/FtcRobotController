@@ -132,7 +132,7 @@ public class RedAutoSensors extends LinearOpMode {
                 })
                 .waitSeconds(1)
                 .addTemporalMarker(()->{
-                    intake.intakePosition(900);
+                    intake.intakePositionExtended(900);
                     intake.setPower(1);
                 })
                 .lineToLinearHeading(new Pose2d(-25, -8, Math.toRadians(183)))
@@ -243,7 +243,7 @@ public class RedAutoSensors extends LinearOpMode {
                 })
                 .waitSeconds(1)
                 .addTemporalMarker(()->{
-                    intake.intakePosition(900);
+                    intake.intakePositionExtended(900);
                     intake.setPower(1);
                 })
                 .lineToLinearHeading(new Pose2d(-24.5, -8, Math.toRadians(181)))
@@ -352,7 +352,7 @@ public class RedAutoSensors extends LinearOpMode {
                 })
                 .waitSeconds(1)
                 .addTemporalMarker(()->{
-                    intake.intakePosition(900);
+                    intake.intakePositionExtended(900);
                     intake.setPower(1);
                 })
                 .lineToLinearHeading(new Pose2d(-24.5, -10, Math.toRadians(184)))

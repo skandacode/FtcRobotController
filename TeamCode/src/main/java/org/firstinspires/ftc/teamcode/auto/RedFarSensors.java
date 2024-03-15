@@ -112,7 +112,7 @@ public class RedFarSensors extends LinearOpMode
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
-                .splineTo(new Vector2d(-56, -43), Math.toRadians(150))
+                .splineTo(new Vector2d(-55.5, -43.5), Math.toRadians(150))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
                     intake.setPower(1);
@@ -184,7 +184,7 @@ public class RedFarSensors extends LinearOpMode
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
-                .splineTo(new Vector2d(-56, -42), Math.toRadians(150))
+                .splineTo(new Vector2d(-55.5, -42.5), Math.toRadians(150))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
                     intake.setPower(1);
@@ -258,7 +258,7 @@ public class RedFarSensors extends LinearOpMode
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(10, -58), Math.toRadians(180))
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
-                .splineTo(new Vector2d(-55.5, -43.5), Math.toRadians(150))
+                .splineTo(new Vector2d(-55, -44), Math.toRadians(150))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
                     intake.setPower(1);
