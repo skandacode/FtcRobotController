@@ -86,7 +86,7 @@ public class Outtake {
             depositExtendo.setPosition(0.3);
         }else{
             //set position
-            depositExtendo.setPosition(0.9);
+            depositExtendo.setPosition(0.95);
         }
     }
     public void setPixelLatch(boolean latchClosed){

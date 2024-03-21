@@ -74,7 +74,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(48, 43, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(47.5, 42, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -85,13 +85,13 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(2)
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
-                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(178))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(177)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(177))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(42.5)//first pickup
+                .forward(43.5)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -155,13 +155,13 @@ public class BlueAutoSensors extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
-                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(178))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(177)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(177))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
                 })
-                .forward(42.5)
+                .forward(44)
                 .waitSeconds(1)
                 .build();
 
@@ -185,7 +185,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(47.5, 36, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(47.5, 34, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -250,7 +250,7 @@ public class BlueAutoSensors extends LinearOpMode {
         TrajectorySequence toBackdropfromStageMiddle=drive.trajectorySequenceBuilder(toStagefromStackPathMiddle.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(43, 35))
+                .lineTo(new Vector2d(43.5, 35))
                 .addTemporalMarker(()->{
                     outtake.depositPosition(330);
                 })
@@ -311,7 +311,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(42.5)//first pickup
+                .forward(44)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -381,7 +381,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
                 })
-                .forward(42.5)
+                .forward(43)
                 .waitSeconds(1)
                 .build();
         //===========================================================================

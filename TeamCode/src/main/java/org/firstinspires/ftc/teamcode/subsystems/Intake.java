@@ -73,6 +73,7 @@ public class Intake {
         }else{
             if (intakeEnd.isPressed()){
                 intakemotor.set(0);
+                this.resetEncoder();
             }else{
                 intakemotor.set(-1);
             }
@@ -158,14 +159,14 @@ public class Intake {
     public void transferPosition(){
         this.setTarget(0);
         //set servos
-        setServos(0.26, 0.2);
+        setServos(0.25, 0.2);
     }
     public void setPower(double power){
         intakeservo1.setPower(power);
         intakeservo2.setPower(power);
     }
     public boolean canEject(){
-        if (intakeEnd.isPressed()){
+        if (intakeEnd.isPressed() || this.getEncoderPos()<5){
             return this.readHeightAnalog()>250;
         }else{
             return false;

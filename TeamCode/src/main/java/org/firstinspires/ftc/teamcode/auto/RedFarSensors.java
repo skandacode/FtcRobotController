@@ -97,7 +97,7 @@ public class RedFarSensors extends LinearOpMode
         TrajectorySequence rightYellow = drive.trajectorySequenceBuilder(rightPurple.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(46, -44))
+                .lineTo(new Vector2d(44.5, -44))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -138,7 +138,7 @@ public class RedFarSensors extends LinearOpMode
                 .setReversed(true)
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
                 .back(48)
-                .lineTo(new Vector2d(43.5, -39))
+                .lineTo(new Vector2d(41.5, -39))
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
                 })
@@ -169,7 +169,7 @@ public class RedFarSensors extends LinearOpMode
         TrajectorySequence middleYellow = drive.trajectorySequenceBuilder(middlePurple.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(46, -34))
+                .lineTo(new Vector2d(44.5, -36))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -210,7 +210,7 @@ public class RedFarSensors extends LinearOpMode
                 .setReversed(true)
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
                 .back(48)
-                .lineTo(new Vector2d(43.5, -39))
+                .lineTo(new Vector2d(41.5, -39))
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
                 })
@@ -242,7 +242,7 @@ public class RedFarSensors extends LinearOpMode
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftPurple.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(46, -29))
+                .lineTo(new Vector2d(45, -29))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -258,7 +258,7 @@ public class RedFarSensors extends LinearOpMode
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(10, -58), Math.toRadians(180))
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(180))
-                .splineTo(new Vector2d(-55, -44), Math.toRadians(150))
+                .splineTo(new Vector2d(-55, -46), Math.toRadians(150))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
                     intake.setPower(1);
@@ -284,7 +284,7 @@ public class RedFarSensors extends LinearOpMode
                 .setReversed(true)
                 .splineTo(new Vector2d(-9, -58), Math.toRadians(0))
                 .back(48)
-                .lineTo(new Vector2d(42.5, -39))
+                .lineTo(new Vector2d(41.5, -39))
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
                 })

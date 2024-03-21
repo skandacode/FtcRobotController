@@ -22,6 +22,7 @@ public class Teleop extends LinearOpMode {
     enum TransferStates{
         IDLE,
         RETRACT,
+        WAITING,
         REVERSEINTAKE,
         PUTDOWN
     }
@@ -51,6 +52,8 @@ public class Teleop extends LinearOpMode {
                     intake.setPower(1);
                 })
                 .transition(()->intake.canEject())
+                .state(TransferStates.WAITING)
+                .transitionTimed(0.5)
 
                 .state(TransferStates.REVERSEINTAKE)
                 .onEnter(()-> intake.setPower(-1))
@@ -165,6 +168,7 @@ public class Teleop extends LinearOpMode {
             outtake.update();
 
             double loop = System.nanoTime();
+            telemetry.addData("transfer state", transferMachine.getState().toString());
             telemetry.addData("hz ", 1000000000 / (loop - loopTime));
             telemetry.addData("intake pos", intake.getEncoderPos());
             telemetry.addData("outtake pos", outtake.getEncoderPos());
