@@ -89,14 +89,14 @@ public class BlueFarSensors extends LinearOpMode
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
                 .back(48)
                 .UNSTABLE_addTemporalMarkerOffset(-0.7, ()->{
-                    outtake.depositPosition(0);
+                    outtake.depositPosition(50);
                     outtake.setPixelLatch(true);
                 })
                 .build();
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftPurple.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(46.5, 41))
+                .lineTo(new Vector2d(46, 39))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -111,7 +111,7 @@ public class BlueFarSensors extends LinearOpMode
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(180))
-                .splineTo(new Vector2d(-53.5, 44), Math.toRadians(210))
+                .splineTo(new Vector2d(-54.5, 43), Math.toRadians(210))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
                     intake.setPower(1);
@@ -161,14 +161,14 @@ public class BlueFarSensors extends LinearOpMode
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
                 .back(48)
                 .UNSTABLE_addTemporalMarkerOffset(-0.7, ()->{
-                    outtake.depositPosition(0);
+                    outtake.depositPosition(50);
                     outtake.setPixelLatch(true);
                 })
                 .build();
         TrajectorySequence middleYellow = drive.trajectorySequenceBuilder(middlePurple.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(47, 34))
+                .lineTo(new Vector2d(46.5, 34))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -183,7 +183,7 @@ public class BlueFarSensors extends LinearOpMode
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(180))
-                .splineTo(new Vector2d(-53.5, 43), Math.toRadians(210))
+                .splineTo(new Vector2d(-55, 43), Math.toRadians(210))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
                     intake.setPower(1);
@@ -234,14 +234,14 @@ public class BlueFarSensors extends LinearOpMode
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(0))
                 .back(48)
                 .UNSTABLE_addTemporalMarkerOffset(-0.7, ()->{
-                    outtake.depositPosition(0);
+                    outtake.depositPosition(50);
                     outtake.setPixelLatch(true);
                 })
                 .build();
         TrajectorySequence rightYellow = drive.trajectorySequenceBuilder(rightPurple.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(46.5, 29))
+                .lineTo(new Vector2d(46.5, 30))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -257,7 +257,7 @@ public class BlueFarSensors extends LinearOpMode
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(10, 58), Math.toRadians(180))
                 .splineTo(new Vector2d(-9, 58), Math.toRadians(180))
-                .splineTo(new Vector2d(-53.5, 43), Math.toRadians(210))
+                .splineTo(new Vector2d(-54.5, 42), Math.toRadians(210))
                 .UNSTABLE_addDisplacementMarkerOffset(-20, ()->{
                     intake.intakePosition4th(0);
                     intake.setPower(1);
@@ -347,6 +347,7 @@ public class BlueFarSensors extends LinearOpMode
         ElapsedTime timer=new ElapsedTime();
         outtake.transferPosition();
         if (randomization==PropPosition.LEFT){
+            sleep(5000);
             intake.transferPosition();
             intake.setTarget(60);
             drive.setPoseEstimate(leftPurple.start());
@@ -369,6 +370,7 @@ public class BlueFarSensors extends LinearOpMode
 
         }
         if (randomization==PropPosition.MIDDLE){
+            sleep(5000);
             intake.transferPosition();
             intake.setTarget(60);
             drive.setPoseEstimate(middlePurple.start());
@@ -390,6 +392,7 @@ public class BlueFarSensors extends LinearOpMode
             }
         }
         if (randomization==PropPosition.RIGHT){
+            sleep(5000);
             intake.transferPosition();
             intake.setTarget(60);
             drive.setPoseEstimate(rightPurple.start());
