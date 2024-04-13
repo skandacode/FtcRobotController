@@ -90,29 +90,30 @@ public class Teleop extends LinearOpMode {
             if (gamepad2.y){
                 intake.intakePositionExtended(500);
                 intake.setPower(1);
+                transferMachine.setState(TransferStates.IDLE);
             }
             if (gamepad2.a){
                 intake.intakePosition(0);
                 intake.setPower(1);
+                transferMachine.setState(TransferStates.IDLE);
             }
             if (gamepad2.x) {
-                if (transferMachine.getState() == TransferStates.IDLE) {
-                    intake.setPower(0);
-                    intake.intakePosition2nd(0);
-                }
+                intake.setPower(0);
+                intake.intakePosition2nd(0);
+                transferMachine.setState(TransferStates.IDLE);
             }
             boolean currRightTrigger=gamepad2.right_trigger>0.5;
             boolean currLeftTrigger=gamepad2.left_trigger>0.5;
 
             if (currRightTrigger && !prevRightTrigger){
                 if (currentheight<700) {
-                    currentheight = currentheight + 100;
+                    currentheight = currentheight + 70;
                 }
                 outtake.depositPosition(currentheight);
             }
             if (currLeftTrigger && !prevLeftTrigger){
                 if (currentheight>0){
-                    currentheight=currentheight-100;
+                    currentheight=currentheight-70;
                 }
                 outtake.depositPosition(currentheight);
             }

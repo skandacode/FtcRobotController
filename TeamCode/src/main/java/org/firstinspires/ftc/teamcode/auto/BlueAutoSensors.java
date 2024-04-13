@@ -86,12 +86,12 @@ public class BlueAutoSensors extends LinearOpMode {
                 })
                 .waitSeconds(2)
                 .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
-                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(179))
+                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(179))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(43.5)//first pickup
+                .forward(42.5)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -162,7 +162,14 @@ public class BlueAutoSensors extends LinearOpMode {
                     intake.setPower(1);
                 })
                 .forward(44)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, ()->{
+                    intake.setTarget(700);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.7, ()->{
+                    intake.setTarget(900);
+                })
                 .waitSeconds(1)
+
                 .build();
 
 
@@ -273,6 +280,12 @@ public class BlueAutoSensors extends LinearOpMode {
                     intake.setPower(1);
                 })
                 .forward(41)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, ()->{
+                    intake.setTarget(700);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.7, ()->{
+                    intake.setTarget(900);
+                })
                 .waitSeconds(1)
                 .build();
         //===========================================================================
@@ -382,6 +395,12 @@ public class BlueAutoSensors extends LinearOpMode {
                     intake.setPower(1);
                 })
                 .forward(42)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, ()->{
+                    intake.setTarget(700);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.7, ()->{
+                    intake.setTarget(900);
+                })
                 .waitSeconds(1)
                 .build();
         //===========================================================================

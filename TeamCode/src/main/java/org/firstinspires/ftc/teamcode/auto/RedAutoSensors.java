@@ -164,6 +164,12 @@ public class RedAutoSensors extends LinearOpMode {
                     intake.setPower(1);
                 })
                 .forward(43.5)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, ()->{
+                    intake.setTarget(700);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.7, ()->{
+                    intake.setTarget(900);
+                })
                 .waitSeconds(1)
                 .build();
 
@@ -275,6 +281,12 @@ public class RedAutoSensors extends LinearOpMode {
                     intake.setPower(1);
                 })
                 .forward(43)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, ()->{
+                    intake.setTarget(700);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.7, ()->{
+                    intake.setTarget(900);
+                })
                 .waitSeconds(1)
                 .build();
         //===========================================================================
@@ -384,6 +396,12 @@ public class RedAutoSensors extends LinearOpMode {
                     intake.setPower(1);
                 })
                 .forward(44)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, ()->{
+                    intake.setTarget(700);
+                })
+                .UNSTABLE_addTemporalMarkerOffset(0.7, ()->{
+                    intake.setTarget(900);
+                })
                 .waitSeconds(1)
                 .build();
         //===========================================================================
