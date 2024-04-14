@@ -87,8 +87,8 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(1.5)
-                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(183)))
-                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(183))
+                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
@@ -157,8 +157,8 @@ public class RedAutoSensors extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(183)))
-                .splineToConstantHeading(new Vector2d(20, -14), Math.toRadians(183))
+                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, -14), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
@@ -204,8 +204,8 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(1.5)
-                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(183)))
-                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(183))
+                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
@@ -274,8 +274,8 @@ public class RedAutoSensors extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(182)))
-                .splineToConstantHeading(new Vector2d(20, -10), Math.toRadians(182))
+                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, -10), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
@@ -319,8 +319,8 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(1.5)
-                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(182)))
-                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(182))
+                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
@@ -389,8 +389,8 @@ public class RedAutoSensors extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(184)))
-                .splineToConstantHeading(new Vector2d(20, -11), Math.toRadians(184))
+                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(181)))
+                .splineToConstantHeading(new Vector2d(20, -11), Math.toRadians(181))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
