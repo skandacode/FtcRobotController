@@ -203,8 +203,8 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(2)
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
-                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(179))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(178))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
@@ -284,7 +284,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     intake.setTarget(700);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(0.7, ()->{
-                    intake.setTarget(900);
+                    intake.setTarget(1000);
                 })
                 .waitSeconds(1)
                 .build();
