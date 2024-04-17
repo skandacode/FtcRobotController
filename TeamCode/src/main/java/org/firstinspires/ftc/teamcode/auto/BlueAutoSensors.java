@@ -74,7 +74,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(48, 42, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(48, 44, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -192,7 +192,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(48, 35, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(48.5, 35, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -203,13 +203,13 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(2)
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(181)))
-                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(181))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(179))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(41)//first pickup
+                .forward(43.5)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -324,7 +324,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(43)//first pickup
+                .forward(43.5)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -388,13 +388,13 @@ public class BlueAutoSensors extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
-                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(178))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(179))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
                 })
-                .forward(42)
+                .forward(44.5)
                 .UNSTABLE_addTemporalMarkerOffset(0.3, ()->{
                     intake.setTarget(700);
                 })
@@ -499,8 +499,6 @@ public class BlueAutoSensors extends LinearOpMode {
             if (right2m.getDistance(DistanceUnit.CM)<60){//senses other robot
                 outtake.setPixelLatch(false);
                 sleep(500);
-                outtake.transferPosition();
-                sleep(500);
             }else{
                 drive.followTrajectorySequenceAsync(toBackdropfromStageLeft);
                 while (drive.isBusy() && opModeIsActive()){updateSystems();}
@@ -537,8 +535,6 @@ public class BlueAutoSensors extends LinearOpMode {
             if (right2m.getDistance(DistanceUnit.CM)<60){//senses other robot
                 outtake.setPixelLatch(false);
                 sleep(500);
-                outtake.transferPosition();
-                sleep(500);
             }else{
                 drive.followTrajectorySequenceAsync(toBackdropfromStageMiddle);
                 while (drive.isBusy() && opModeIsActive()){updateSystems();}
@@ -574,8 +570,6 @@ public class BlueAutoSensors extends LinearOpMode {
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
             if (right2m.getDistance(DistanceUnit.CM)<60){//senses other robot
                 outtake.setPixelLatch(false);
-                sleep(500);
-                outtake.transferPosition();
                 sleep(500);
             }else{
                 drive.followTrajectorySequenceAsync(toBackdropfromStageRight);

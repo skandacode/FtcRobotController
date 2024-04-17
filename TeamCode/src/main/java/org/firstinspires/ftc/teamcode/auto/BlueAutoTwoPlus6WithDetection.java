@@ -45,6 +45,7 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
     {
         intake.init(hardwareMap);
         outtake.init(hardwareMap);
+        intake.resetEncoder();
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         drive = new SampleMecanumDrive(hardwareMap);
@@ -241,8 +242,8 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(0.4)
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
-                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(178))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
@@ -281,8 +282,8 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
-                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(179))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(181)))
+                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(181))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
@@ -328,7 +329,7 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
 
                 .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
                 .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(178))
-                .splineTo(new Vector2d(-26, 9), Math.toRadians(160))//intake for third time
+                .splineTo(new Vector2d(-26, 9), Math.toRadians(162))//intake for third time
                 .UNSTABLE_addTemporalMarkerOffset(-0.5, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
@@ -398,8 +399,8 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(0.4)
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
-                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(178))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
@@ -438,8 +439,8 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
-                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(179))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
@@ -553,7 +554,8 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
             telemetry.addData("Pipeline time ms", webcam.getPipelineTimeMs());
             telemetry.addData("Overhead time ms", webcam.getOverheadTimeMs());
             telemetry.addData("Theoretical max FPS", webcam.getCurrentPipelineMaxFps());
-
+            telemetry.addData("Intake position", intake.getEncoderPos());
+            telemetry.addData("outtake position", outtake.getEncoderPos());
             telemetry.update();
 
             if (Objects.equals(pipeline.getPosition(), "LEFT")) {
