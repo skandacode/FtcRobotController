@@ -64,7 +64,7 @@ public class RedAutoSensors extends LinearOpMode {
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(50))
 
                 .addTemporalMarker(()->{
-                    intake.stay(80);
+                    intake.stay(60);
                 })
                 .lineTo(new Vector2d(25, -42))
                 .setReversed(true)
@@ -76,7 +76,7 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(47.5, -41, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(48.5, -41, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -87,13 +87,13 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(1.5)
-                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(180))
+                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(179)))
+                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(179))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(43.5)//first pickup
+                .forward(44.5)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -141,7 +141,7 @@ public class RedAutoSensors extends LinearOpMode {
         TrajectorySequence toBackdropfromStageRight=drive.trajectorySequenceBuilder(toStagefromStackPathRight.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(43, -35))
+                .lineTo(new Vector2d(44, -35))
                 .addTemporalMarker(()->{
                     outtake.depositPosition(330);
                 })
@@ -181,9 +181,9 @@ public class RedAutoSensors extends LinearOpMode {
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(50))
 
                 .addTemporalMarker(()->{
-                    intake.stay(80);
+                    intake.stay(60);
                 })
-                .lineTo(new Vector2d(11.75, -34))
+                .lineTo(new Vector2d(11.75, -35))
                 .setReversed(true)
                 .addTemporalMarker(()->{
                     intake.stay(0);
@@ -193,7 +193,7 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(48, -34.5, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(49, -34.5, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -204,13 +204,13 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(1.5)
-                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(180)))
-                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(180))
+                .lineToSplineHeading(new Pose2d(30, -12, Math.toRadians(179)))
+                .splineToConstantHeading(new Vector2d(20, -12), Math.toRadians(179))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(42)//first pickup
+                .forward(43)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -296,7 +296,7 @@ public class RedAutoSensors extends LinearOpMode {
 
                 .addTemporalMarker(()->{
                     intake.transferPosition();
-                    intake.setTarget(80);
+                    intake.setTarget(60);
                 })
                 .splineTo(new Vector2d(7, -37), Math.toRadians(360-228.62))
                 .setReversed(true)
@@ -308,7 +308,7 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(47.5, -29, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(48.5, -29, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -325,7 +325,7 @@ public class RedAutoSensors extends LinearOpMode {
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(44)//first pickup
+                .forward(44.5)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -418,7 +418,7 @@ public class RedAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                     intake.intakePosition5th(0);
                 })
-                .splineToConstantHeading(new Vector2d(55, -10), Math.toRadians(0.00))
+                .splineToConstantHeading(new Vector2d(55, -12), Math.toRadians(0.00))
                 .build();
 
         hubs = hardwareMap.getAll(LynxModule.class);
@@ -485,7 +485,7 @@ public class RedAutoSensors extends LinearOpMode {
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
             drive.followTrajectorySequenceAsync(toStagefromStackPathLeft);
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
-            if (left2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+            if (left2m.getDistance(DistanceUnit.CM)<0){//senses other robot
                 drive.followTrajectorySequenceAsync(toStackFromStageLeft);
                 while (drive.isBusy() && opModeIsActive()){updateSystems();}
                 timesSeen++;
@@ -497,7 +497,7 @@ public class RedAutoSensors extends LinearOpMode {
             }
             drive.followTrajectorySequenceAsync(toStagefromStackPathLeft);
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
-            if (left2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+            if (left2m.getDistance(DistanceUnit.CM)<0){//senses other robot
                 outtake.setPixelLatch(false);
                 sleep(500);
                 outtake.transferPosition();
@@ -523,7 +523,7 @@ public class RedAutoSensors extends LinearOpMode {
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
             drive.followTrajectorySequenceAsync(toStagefromStackPathMiddle);
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
-            if (left2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+            if (left2m.getDistance(DistanceUnit.CM)<0){//senses other robot
                 drive.followTrajectorySequenceAsync(toStackFromStageMiddle);
                 while (drive.isBusy() && opModeIsActive()){updateSystems();}
                 timesSeen++;
@@ -535,7 +535,7 @@ public class RedAutoSensors extends LinearOpMode {
             }
             drive.followTrajectorySequenceAsync(toStagefromStackPathMiddle);
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
-            if (left2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+            if (left2m.getDistance(DistanceUnit.CM)<0){//senses other robot
                 outtake.setPixelLatch(false);
                 sleep(500);
                 outtake.transferPosition();
@@ -561,7 +561,7 @@ public class RedAutoSensors extends LinearOpMode {
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
             drive.followTrajectorySequenceAsync(toStagefromStackPathRight);
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
-            if (left2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+            if (left2m.getDistance(DistanceUnit.CM)<0){//senses other robot
                 drive.followTrajectorySequenceAsync(toStackFromStageRight);
                 while (drive.isBusy() && opModeIsActive()){updateSystems();}
                 timesSeen++;
@@ -573,7 +573,7 @@ public class RedAutoSensors extends LinearOpMode {
             }
             drive.followTrajectorySequenceAsync(toStagefromStackPathRight);
             while (drive.isBusy() && opModeIsActive()){updateSystems();}
-            if (left2m.getDistance(DistanceUnit.CM)<60){//senses other robot
+            if (left2m.getDistance(DistanceUnit.CM)<0){//senses other robot
                 outtake.setPixelLatch(false);
                 sleep(500);
                 outtake.transferPosition();

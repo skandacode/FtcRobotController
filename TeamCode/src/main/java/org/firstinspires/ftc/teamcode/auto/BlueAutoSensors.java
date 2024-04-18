@@ -62,7 +62,7 @@ public class BlueAutoSensors extends LinearOpMode {
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(50))
 
                 .addTemporalMarker(()->{
-                    intake.stay(80);
+                    intake.stay(60);
                 })
                 .lineTo(new Vector2d(25, 42))
                 .setReversed(true)
@@ -74,7 +74,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(48, 44, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(49, 44, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -85,8 +85,8 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(2)
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
-                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(179))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
@@ -158,7 +158,7 @@ public class BlueAutoSensors extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
                 .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(179))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
-                    intake.intakePositionExtended(900);
+                    intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
                 .forward(44)
@@ -180,7 +180,7 @@ public class BlueAutoSensors extends LinearOpMode {
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(50))
 
                 .addTemporalMarker(()->{
-                    intake.stay(80);
+                    intake.stay(60);
                 })
                 .lineTo(new Vector2d(11.75, 36.32))
                 .setReversed(true)
@@ -192,7 +192,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(48.5, 35, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(49, 35, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
@@ -276,7 +276,7 @@ public class BlueAutoSensors extends LinearOpMode {
                 .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
                 .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(179))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
-                    intake.intakePositionExtended(900);
+                    intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
                 .forward(41)
@@ -295,7 +295,7 @@ public class BlueAutoSensors extends LinearOpMode {
 
                 .addTemporalMarker(()->{
                     intake.transferPosition();
-                    intake.setTarget(80);
+                    intake.setTarget(60);
                 })
                 .splineTo(new Vector2d(8, 37), Math.toRadians(228.62))
                 .setReversed(true)
@@ -307,7 +307,7 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(48, 29, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(49, 29, Math.toRadians(180.00)))
                 .setReversed(false)
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))

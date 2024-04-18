@@ -233,7 +233,7 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
                     outtake.setPixelLatch(true);
                 })
                 .back(4)
-                .lineToLinearHeading(new Pose2d(48, 35, Math.toRadians(180.00)))
+                .lineToLinearHeading(new Pose2d(49, 35, Math.toRadians(180.00)))
                 .setReversed(false)
                 .UNSTABLE_addTemporalMarkerOffset(0.2, ()->{
                     outtake.setPixelLatch(false);
@@ -282,8 +282,8 @@ public class BlueAutoTwoPlus6WithDetection extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(181)))
-                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(181))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(182)))
+                .splineToConstantHeading(new Vector2d(20, 12), Math.toRadians(182))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePositionExtended(900);
                     intake.setPower(1);
