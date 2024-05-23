@@ -78,7 +78,7 @@ public class RedFarSensors extends LinearOpMode
         left2m=hardwareMap.get(Rev2mDistanceSensor.class, "left2m");
         right2m=hardwareMap.get(Rev2mDistanceSensor.class, "right2m");
 
-        TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d(-36.11, -62.17, Math.toRadians(90)))
+        TrajectorySequence rightPurple = drive.trajectorySequenceBuilder(new Pose2d(-38, -62.17, Math.toRadians(90)))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(-32.23, -39.31), Math.toRadians(42.71))
@@ -100,6 +100,7 @@ public class RedFarSensors extends LinearOpMode
                 .lineTo(new Vector2d(44.5, -45))
                 .setReversed(false)
                 .addTemporalMarker(()->{
+                    outtake.setTarget(100);
                     outtake.setPixelLatch(false);
                 })
                 .waitSeconds(1)
@@ -132,7 +133,7 @@ public class RedFarSensors extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(150);
+                    outtake.depositPosition(200);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -150,7 +151,7 @@ public class RedFarSensors extends LinearOpMode
                 .build();
         //===============================================================================================
 
-        TrajectorySequence middlePurple = drive.trajectorySequenceBuilder(new Pose2d(-36.11, -62.17, Math.toRadians(90)))
+        TrajectorySequence middlePurple = drive.trajectorySequenceBuilder(new Pose2d(-38, -62.17, Math.toRadians(90)))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .splineTo(new Vector2d(-36.11, -34.51), Math.toRadians(90))
@@ -172,6 +173,7 @@ public class RedFarSensors extends LinearOpMode
                 .lineTo(new Vector2d(45, -37))
                 .setReversed(false)
                 .addTemporalMarker(()->{
+                    outtake.setTarget(100);
                     outtake.setPixelLatch(false);
                 })
                 .waitSeconds(1)
@@ -204,7 +206,7 @@ public class RedFarSensors extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(150);
+                    outtake.depositPosition(200);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)
@@ -222,7 +224,7 @@ public class RedFarSensors extends LinearOpMode
                 .build();
         //============================================================================
 
-        TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d(-36.11, -62.17, Math.toRadians(90)))
+        TrajectorySequence leftPurple = drive.trajectorySequenceBuilder(new Pose2d(-38, -62.17, Math.toRadians(90)))
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
                 .lineToConstantHeading(new Vector2d(-49, -39.31))
@@ -242,9 +244,10 @@ public class RedFarSensors extends LinearOpMode
         TrajectorySequence leftYellow = drive.trajectorySequenceBuilder(leftPurple.end())
                 .setVelConstraint(SampleMecanumDrive.getVelocityConstraint(45, Math.toRadians(90), DriveConstants.TRACK_WIDTH))
                 .setAccelConstraint(SampleMecanumDrive.getAccelerationConstraint(45))
-                .lineTo(new Vector2d(46, -31))
+                .lineTo(new Vector2d(46, -30))
                 .setReversed(false)
                 .addTemporalMarker(()->{
+                    outtake.setTarget(100);
                     outtake.setPixelLatch(false);
                 })
                 .waitSeconds(1)
@@ -278,7 +281,7 @@ public class RedFarSensors extends LinearOpMode
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addTemporalMarkerOffset(2.5, ()->{
-                    outtake.depositPosition(150);
+                    outtake.depositPosition(200);
                     outtake.setPixelLatch(true);
                 })
                 .setReversed(true)

@@ -44,6 +44,8 @@ public class BlueAutoSensors extends LinearOpMode {
     {
         intake.init(hardwareMap);
         outtake.init(hardwareMap);
+        outtake.resetEncoder();
+        intake.resetEncoder();
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         drive = new SampleMecanumDrive(hardwareMap);
@@ -203,13 +205,13 @@ public class BlueAutoSensors extends LinearOpMode {
                     outtake.transferPosition();
                 })
                 .waitSeconds(2)
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(178)))
-                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(178))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(180)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(180))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition5th(900);
                     intake.setPower(1);
                 })
-                .forward(43.5)//first pickup
+                .forward(44)//first pickup
                 .UNSTABLE_addTemporalMarkerOffset(0.5, ()->{
                     intake.intakePosition4th();
                 })
@@ -273,13 +275,13 @@ public class BlueAutoSensors extends LinearOpMode {
                 .addTemporalMarker(()->{
                     outtake.transferPosition();
                 })
-                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(179)))
-                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(179))
+                .lineToSplineHeading(new Pose2d(30, 12, Math.toRadians(181)))
+                .splineToConstantHeading(new Vector2d(20, 9), Math.toRadians(181))
                 .UNSTABLE_addDisplacementMarkerOffset(0, ()->{
                     intake.intakePosition2nd(900);
                     intake.setPower(1);
                 })
-                .forward(41)
+                .forward(41.5)
                 .UNSTABLE_addTemporalMarkerOffset(0.3, ()->{
                     intake.setTarget(700);
                 })
@@ -446,7 +448,7 @@ public class BlueAutoSensors extends LinearOpMode {
             telemetry.addData("Pipeline time ms", webcam.getPipelineTimeMs());
             telemetry.addData("Overhead time ms", webcam.getOverheadTimeMs());
             telemetry.addData("Theoretical max FPS", webcam.getCurrentPipelineMaxFps());
-
+            telemetry.addData("outtake position", outtake.getEncoderPos());
             telemetry.update();
 
             if (Objects.equals(pipeline.getPosition(), "LEFT")) {

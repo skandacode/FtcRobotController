@@ -64,15 +64,16 @@ public class RedClosetwopluszero extends LinearOpMode
 
         TrajectorySequence right=drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90)))
                 .lineTo(new Vector2d(26, -40))
+                .waitSeconds(7)
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
-                    outtake.depositPosition(0);
+                    outtake.depositPosition(100);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48, -43), Math.toRadians(-2.00))
+                .splineTo(new Vector2d(49.5, -40), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -85,15 +86,16 @@ public class RedClosetwopluszero extends LinearOpMode
 
         TrajectorySequence middle=drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90.00)))
                 .splineTo(new Vector2d(12, -35), Math.toRadians(90))
+                .waitSeconds(7)
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(30, ()->{
-                    outtake.depositPosition(0);
+                    outtake.depositPosition(100);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48, -37), Math.toRadians(-2.00))
+                .splineTo(new Vector2d(49.5, -34), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -105,15 +107,16 @@ public class RedClosetwopluszero extends LinearOpMode
                 .build();
         TrajectorySequence left = drive.trajectorySequenceBuilder(new Pose2d(11.83, -62.16, Math.toRadians(90.00)))
                 .splineTo(new Vector2d(6.5, -37), Math.toRadians(-228.62))
+                .waitSeconds(7)
                 .setReversed(true)
                 .UNSTABLE_addDisplacementMarkerOffset(10, ()->{
                     intake.intakePosition5th(0);
                 })
                 .UNSTABLE_addDisplacementMarkerOffset(20, ()->{
-                    outtake.depositPosition(0);
+                    outtake.depositPosition(100);
                     outtake.setPixelLatch(true);
                 })
-                .splineTo(new Vector2d(48, -29), Math.toRadians(-2.00))
+                .splineTo(new Vector2d(49.5, -31), Math.toRadians(-2.00))
                 .setReversed(false)
                 .addTemporalMarker(()->{
                     outtake.setPixelLatch(false);
@@ -123,7 +126,13 @@ public class RedClosetwopluszero extends LinearOpMode
                 })
                 .waitSeconds(2.5)
                 .build();
-
+        TrajectorySequence parkCorner=drive.trajectorySequenceBuilder(right.end())
+                .addTemporalMarker(()->{
+                    outtake.transferPosition();
+                    intake.intakePosition5th(0);
+                })
+                .splineToConstantHeading(new Vector2d(55, -60), Math.toRadians(0.00))
+                .build();
 
         while (opModeInInit()){
             telemetry.addData("Frame Count", webcam.getFrameCount());
@@ -190,5 +199,6 @@ public class RedClosetwopluszero extends LinearOpMode
 
             telemetry.update();
         }
+        drive.followTrajectorySequence(parkCorner);
     }
 }
